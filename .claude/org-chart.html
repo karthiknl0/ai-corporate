@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OmSakthi ERP — Agent Workforce</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--surface-2:#fff;--surface-1:#f8f9fa;--text-primary:#1a1a1a;--text-secondary:#6b7280;--text-muted:#9ca3af;--border:#e5e7eb;--border-strong:#d1d5db;--bg-accent:#eff6ff;--text-accent:#2563eb;--font-sans:system-ui,-apple-system,sans-serif;--font-mono:'SF Mono',Consolas,monospace;--radius:8px}
+@media(prefers-color-scheme:dark){:root{--surface-2:#1a1a1a;--surface-1:#262626;--text-primary:#f0f0f0;--text-secondary:#9ca3af;--text-muted:#6b7280;--border:#374151;--border-strong:#4b5563;--bg-accent:#1e3a5f;--text-accent:#60a5fa}}
+body{font-family:var(--font-sans);background:var(--surface-2);color:var(--text-primary);padding:2rem;max-width:1200px;margin:0 auto}
+h1{font-size:22px;font-weight:500;margin-bottom:0.5rem}
+.subtitle{font-size:14px;color:var(--text-secondary);margin-bottom:1.5rem}
+.org{padding:1rem 0}
+.tier{margin-bottom:1.5rem}
+.tier-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid var(--border)}
+.tier-label{font-size:13px;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px}
+.tier-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500}
+.t-opus .tier-badge{background:var(--bg-accent);color:var(--text-accent)}
+.t-sonnet .tier-badge{background:#E1F5EE;color:#0F6E56}
+.t-haiku .tier-badge{background:#FFF3E0;color:#993C1D}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.5rem}
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem 0.75rem;cursor:pointer;transition:border-color 0.15s;background:var(--surface-1)}
+.card:hover{border-color:var(--border-strong)}
+.card-top{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem}
+.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.a-opus{background:var(--bg-accent);color:var(--text-accent)}
+.a-sonnet{background:#E1F5EE;color:#0F6E56}
+.a-haiku{background:#FFF3E0;color:#993C1D}
+.name{font-size:14px;font-weight:500;color:var(--text-primary)}
+.slug{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
+.role{font-size:12px;color:var(--text-secondary);line-height:1.4;margin-top:2px}
+.detail{display:none;margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);line-height:1.5}
+.card.open .detail{display:block}
+.card.open{border-color:var(--border-strong)}
+.stats{display:flex;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:28px;font-weight:500;color:var(--text-primary)}
+.stat-label{font-size:12px;color:var(--text-secondary)}
+.filter-bar{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.fbtn{font-size:12px;padding:4px 12px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;font-family:var(--font-sans)}
+.fbtn:hover{border-color:var(--border-strong)}
+.fbtn.active{background:var(--text-primary);color:var(--surface-2);border-color:var(--text-primary)}
+@media(prefers-color-scheme:dark){
+.t-sonnet .tier-badge{background:#085041;color:#5DCAA5}
+.t-haiku .tier-badge{background:#4A1B0C;color:#F0997B}
+.a-sonnet{background:#085041;color:#5DCAA5}
+.a-haiku{background:#4A1B0C;color:#F0997B}
+}
+</style>
+</head>
+<body>
+<h1>OmSakthi ERP — Agent workforce</h1>
+<p class="subtitle">Interactive org chart. Click any card to expand. Filter by model tier or domain.</p>
+<div class="org">
+<div class="stats">
+<div class="stat"><div class="stat-num">45</div><div class="stat-label">Total employees</div></div>
+<div class="stat"><div class="stat-num">10</div><div class="stat-label">Senior leadership (opus)</div></div>
+<div class="stat"><div class="stat-num">19</div><div class="stat-label">Specialists (sonnet)</div></div>
+<div class="stat"><div class="stat-num">10</div><div class="stat-label">Workers (haiku)</div></div>
+<div class="stat"><div class="stat-num">6</div><div class="stat-label">Auditors (mixed)</div></div>
+</div>
+<div class="filter-bar">
+<button class="fbtn active" onclick="filterCards('all')">All</button>
+<button class="fbtn" onclick="filterCards('opus')">Opus</button>
+<button class="fbtn" onclick="filterCards('sonnet')">Sonnet</button>
+<button class="fbtn" onclick="filterCards('haiku')">Haiku</button>
+<button class="fbtn" onclick="filterCards('db')"><i class="ti ti-database" aria-hidden="true"></i> Database</button>
+<button class="fbtn" onclick="filterCards('ui')"><i class="ti ti-layout" aria-hidden="true"></i> UI / Frontend</button>
+<button class="fbtn" onclick="filterCards('security')"><i class="ti ti-shield" aria-hidden="true"></i> Security</button>
+</div>
+
+<div class="tier t-opus">
+<div class="tier-head"><span class="tier-label">Senior leadership</span><span class="tier-badge">Opus</span></div>
+<div class="grid">
+<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">PR</div><div><div class="name">Priya</div><div class="slug">product-owner</div></div></div><div class="role">Business requirements to tech specs</div><div class="detail">Translates GST circulars, customer requests, and textile-industry workflows into precise technical specs with acceptance criteria. Does not write code.</div></div>
+<div class="card" data-model="opus" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AR</div><div><div class="name">Arjun</div><div class="slug">senior-data-architect</div></div></div><div class="role">Schema strategy and data governance</div><div class="detail">Add column vs new table, archival design, migration sequencing, multi-tenant isolation. Wrong schema decisions compound — this role prevents them.</div></div>
+<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">VK</div><div><div class="name">Vikram</div><div class="slug">incident-commander</div></div></div><div class="role">Production incident coordination</div><div class="detail">Triage order, rollback-vs-fix-forward, all-clear. Coordinates multi-agent incident response. Never fixes — issues decisions.</div></div>
+<div class="card" data-model="opus" data-domain="ui planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">RJ</div><div><div class="name">Rajan</div><div class="slug">senior-engineer</div></div></div><div class="role">Cross-cutting architecture decisions</div><div class="detail">Blast-radius assessment, arch decisions spanning 3+ domains, implementation spec + agent delegation plans.</div></div>
+<div class="card" data-model="opus" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">KR</div><div><div class="name">Kiran</div><div class="slug">senior-security-advisor</div></div></div><div class="role">Threat modeling and security posture</div><div class="detail">Opus-grade judgment on findings, remediation priority, and agent assignment. Supersedes security-auditor for critical decisions.</div></div>
+<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">SH</div><div><div class="name">Shreya</div><div class="slug">senior-planner</div></div></div><div class="role">Multi-phase task decomposition</div><div class="detail">Decomposes work into ordered phases, assigns agents, flags risks and gates, estimates token cost per phase.</div></div>
+<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">GU</div><div><div class="name">Guru</div><div class="slug">senior-guide</div></div></div><div class="role">OmSakthi-specific domain guidance</div><div class="detail">"How should we approach X in this repo?" Definitive answers on architecture, patterns, agent routing, safety gates.</div></div>
+<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AN</div><div><div class="name">Ananya</div><div class="slug">senior-hr</div></div></div><div class="role">Task routing and agent delegation</div><div class="detail">Routes tasks to cheapest capable agent tier, writes delegation prompts, prevents over-spending on Sonnet/Opus for Haiku-level work.</div></div>
+<div class="card" data-model="opus" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AA</div><div><div class="name">Aarav</div><div class="slug">refactoring-lead</div></div></div><div class="role">Cross-cutting file splits and dead-code</div><div class="detail">Systematic tech-debt campaigns: splitting 1500+ line files, removing dead code, consolidating duplicate utilities.</div></div>
+<div class="card" data-model="opus" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">DH</div><div><div class="name">Dharma</div><div class="slug">compliance-officer</div></div></div><div class="role">DPDP / PCI-DSS / GST compliance</div><div class="detail">Indian regulatory compliance analysis across DPDP Act, PCI-DSS payment data, and GST audit-trail requirements.</div></div>
+<div class="card" data-model="opus" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">NK</div><div><div class="name">Nakul</div><div class="slug">debugger</div></div></div><div class="role">Hard / multi-system bug root-cause</div><div class="detail">Structured isolate, hypothesize, verify cycle for bugs involving React + DB + edge functions. Produces root-cause explanations.</div></div>
+</div>
+</div>
+
+<div class="tier t-sonnet">
+<div class="tier-head"><span class="tier-label">Domain specialists</span><span class="tier-badge">Sonnet</span></div>
+<div class="grid">
+<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">DP</div><div><div class="name">Deepak</div><div class="slug">postgres-writer</div></div></div><div class="role">Approved DB writes / DDL / migration apply</div><div class="detail">INSERT, UPDATE, DELETE, DDL on live Supabase. Only after user approval. Always verifies with SELECT after write.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">TJ</div><div><div class="name">Tejas</div><div class="slug">typescript-pro</div></div></div><div class="role">Complex TS errors and generics</div><div class="detail">Advanced TypeScript: complex type errors, generic constraints, discriminated unions, strict-mode violations, OmSakthi tsconfig patterns.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RY</div><div><div class="name">Riya</div><div class="slug">react-specialist</div></div></div><div class="role">React re-renders / TanStack cache / perf</div><div class="detail">Unnecessary re-renders, missing memo/useCallback, Suspense, stale closures, state batching, TanStack Query cache design.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">GV</div><div><div class="name">Govind</div><div class="slug">gst-specialist</div></div></div><div class="role">GST: e-invoice, e-way, GSTR, tax slabs</div><div class="detail">Indian GST law + all OmSakthi GST skill files. E-invoice IRN, e-way bills, GSTR-2B reconciliation, HSN codes, reverse charge.</div></div>
+<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SU</div><div><div class="name">Surya</div><div class="slug">edge-fn-specialist</div></div></div><div class="role">Deno edge functions / RPC write+debug</div><div class="detail">supabase/functions/, voucher-posting RPCs, _shared/ utilities, deploy commands, fallback-removal safety.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">LK</div><div><div class="name">Lakshmi</div><div class="slug">voucher-accounting</div></div></div><div class="role">VoucherEntry / bank-reco / ledger / payments</div><div class="detail">4300-line VoucherEntry, bank reconciliation, ledger statement, voucher view/print, payment summary hooks, double-entry model.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VR</div><div><div class="name">Varun</div><div class="slug">sales-purchase</div></div></div><div class="role">Sale/Purchase create, edit, view, list, convert</div><div class="detail">Owns the mirror-domain rule (sale to purchase). Document totals, GST split, returns, conversions (PO to bill, SO to invoice).</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">KT</div><div><div class="name">Karthik</div><div class="slug">jobwork-specialist</div></div></div><div class="role">Jobwork Out/In/Bills/Outstanding</div><div class="detail">Jobwork cycle: Out rates, In receive/confirm/splits/addon-sync, bill posting (TDS, round-off), jobwork stock deltas.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">MR</div><div><div class="name">Meera</div><div class="slug">storefront-portal</div></div></div><div class="role">B2C storefront / B2B portal / b2c-auth</div><div class="detail">Customer-facing pages: shop/*, portal/*, b2c-auth edge fn (non-JWT sessions), cart/checkout, order placement.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RH</div><div><div class="name">Rohan</div><div class="slug">reports-print</div></div></div><div class="role">Reports hub / ledger exports / print, PDF</div><div class="detail">Reports.tsx, ledger statement CSV/PDF, print models, page-break fixes, HTML export builders.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">CH</div><div><div class="name">Chandra</div><div class="slug">mutation-auditor</div></div></div><div class="role">Mutation side-effect chain audit</div><div class="detail">Cache invalidation, stock deltas, ledger entries, edge function triggers, document status changes, mirror-domain gaps.</div></div>
+<div class="card" data-model="sonnet" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">PV</div><div><div class="name">Parvati</div><div class="slug">security-boundary</div></div></div><div class="role">RLS / tenant isolation / endpoint audit</div><div class="detail">New public endpoint, RPC, portal page, table — RLS correctness, tenant_id enforcement, anon vs authenticated, secret exposure.</div></div>
+<div class="card" data-model="sonnet" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SV</div><div><div class="name">Shiva</div><div class="slug">security-auditor</div></div></div><div class="role">Security audit phases (Tier 1/2/3)</div><div class="detail">OWASP playbooks, SECURITY-AUDIT.md tracker, severity-ranked findings. Diagnoses only — never fixes.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">AK</div><div><div class="name">Anika</div><div class="slug">integration-specialist</div></div></div><div class="role">WhatsApp / GST API / R2 / SMS integrations</div><div class="detail">External API integrations: WhatsApp Meta Cloud API, NIC e-invoice/e-way, R2, SMS providers, webhooks, retry logic.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VJ</div><div><div class="name">Vijay</div><div class="slug">performance-engineer</div></div></div><div class="role">Bundle size / VPS latency / cold-start</div><div class="detail">Vite bundle, VPS response, Supabase query timing, edge fn cold-start, Core Web Vitals, TanStack cache efficiency.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">NS</div><div><div class="name">Nisha</div><div class="slug">qa-engineer</div></div></div><div class="role">Test cases, smoke tests, E2E scenarios</div><div class="detail">Designs and writes the first tests for OmSakthi features. No existing test suite — builds from scratch using APP-GUIDE.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">KK</div><div><div class="name">Kritika</div><div class="slug">code-reviewer</div></div></div><div class="role">PR/diff review against OmSakthi patterns</div><div class="detail">Mirror-domain, select("*") ban, blast-radius, component-architecture, large-file rule, double-entry correctness.</div></div>
+<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RV</div><div><div class="name">Ravi</div><div class="slug">devops-engineer</div></div></div><div class="role">VPS ops: Docker, Nginx, deploy scripts</div><div class="detail">Container management, Supabase compose, SSL/TLS, cron jobs on VPS, SSH admin. Never self-approves prod changes.</div></div>
+<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SG</div><div><div class="name">Sagar</div><div class="slug">data-migrator</div></div></div><div class="role">Tally/CSV import and bulk data transforms</div><div class="detail">Tally import scripts, CSV ingestion, opening-balance migration files. Orchestrator approves before any data apply.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">MT</div><div><div class="name">Mitra</div><div class="slug">code-mapper</div></div></div><div class="role">Large-file code-map skill creation</div><div class="detail">Creates/updates mandatory code-map skills for 1500+ line files. Reads big files, extracts line-anchored structure, writes the skill.</div></div>
+<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VD</div><div><div class="name">Vidya</div><div class="slug">skill-updater</div></div></div><div class="role">Auto skill maintenance on every commit</div><div class="detail">Triggered on code changes. Reads changed code + current skill, rewrites stale sections. Never invents — all updates grounded in source.</div></div>
+</div>
+</div>
+
+<div class="tier t-haiku">
+<div class="tier-head"><span class="tier-label">Workers and auditors</span><span class="tier-badge">Haiku</span></div>
+<div class="grid">
+<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">PS</div><div><div class="name">Prasad</div><div class="slug">postgres-pro</div></div></div><div class="role">READ-ONLY DB: EXPLAIN, index, schema</div><div class="detail">Query optimization, EXPLAIN analysis, index recommendations, RLS audits, migration review, slow query diagnosis.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">AD</div><div><div class="name">Anand</div><div class="slug">verifier</div></div></div><div class="role">Build/typecheck/deno:check verification</div><div class="detail">Runs the full verification suite and reports pass/fail with evidence. Read-only — never edits, commits, or deploys.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">SR</div><div><div class="name">Saras</div><div class="slug">docs-scribe</div></div></div><div class="role">Multi-file doc-pairing from spec</div><div class="detail">Applies orchestrator's doc update spec across multiple skill/doc files. Never invents facts, never commits.</div></div>
+<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">MN</div><div><div class="name">Manu</div><div class="slug">migration-file-writer</div></div></div><div class="role">Write migration SQL file (no execute)</div><div class="detail">Takes exact SQL from orchestrator, writes to supabase/migrations/. No SQL design, no judgment, no DB execution.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">LL</div><div><div class="name">Leela</div><div class="slug">linter-worker</div></div></div><div class="role">ESLint / Prettier / regrep checks</div><div class="detail">Runs lint and format checks, reports violations with file:line. Never fixes — just reports.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">GT</div><div><div class="name">Gita</div><div class="slug">grep-reporter</div></div></div><div class="role">Batch codebase search and pattern tables</div><div class="detail">Runs a batch of grep patterns and compiles results. Saves main-context tokens on broad surveys.</div></div>
+<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">LT</div><div><div class="name">Lata</div><div class="slug">log-monitor</div></div></div><div class="role">VPS Docker/Kong/edge-fn log triage</div><div class="detail">Reads container logs, extracts error patterns, returns structured summary. Never restarts or fixes.</div></div>
+<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">BL</div><div><div class="name">Bala</div><div class="slug">bi-analyst</div></div></div><div class="role">Read-only analytics SQL</div><div class="detail">Sales summaries, inventory aging, outstanding, top items by revenue. SELECT only, always tenant-scoped.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">KV</div><div><div class="name">Kavya</div><div class="slug">comms-manager</div></div></div><div class="role">PR descriptions, changelogs, release notes</div><div class="detail">Generates user-facing writing from git diffs or feature descriptions. Pure writing — no code changes.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">AS</div><div><div class="name">Asha</div><div class="slug">accessibility-tester</div></div></div><div class="role">WCAG a11y audit (portal/shop)</div><div class="detail">WCAG 2.1 AA, keyboard navigation, screen reader, color contrast, touch targets, ARIA patterns.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">ST</div><div><div class="name">Sita</div><div class="slug">stock-integrity-auditor</div></div></div><div class="role">Stock-ledger correctness audit</div><div class="detail">Verifies stock_ledger deltas after mutations. Audits and reports with evidence — never fixes.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">DN</div><div><div class="name">Dhana</div><div class="slug">financial-auditor</div></div></div><div class="role">Double-entry / payment / ledger audit</div><div class="detail">Verifies debits == credits, party balances, payment allocation, auto-posting completeness. Never edits.</div></div>
+<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">DS</div><div><div class="name">Disha</div><div class="slug">skill-drift-auditor</div></div></div><div class="role">Skill vs source drift survey</div><div class="detail">Surveys .agents/skills/ for drift from current source. Produces prioritized drift report. Only on explicit request.</div></div>
+</div>
+</div>
+</div>
+<script>
+function toggle(el){el.classList.toggle('open')}
+function filterCards(f){
+document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active')});
+event.target.classList.add('active');
+document.querySelectorAll('.card').forEach(function(c){
+if(f==='all'){c.style.display='';return}
+var m=c.dataset.model,d=c.dataset.domain;
+var show=(f==='opus'||f==='sonnet'||f==='haiku')?m===f:d.indexOf(f)!==-1;
+c.style.display=show?'':'none';
+});
+}
+</script>
+</body>
+</html>

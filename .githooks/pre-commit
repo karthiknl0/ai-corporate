@@ -1,0 +1,86 @@
+#!/bin/sh
+# ─────────────────────────────────────────────────────────────────────────────
+# AI Corporate — Pre-Commit Gate System
+# Enforces documentation pairing, testing, and agent knowledge updates.
+#
+# Customize the gates below for your project's file structure.
+# Bypass: git commit --no-verify (agents are forbidden from using this)
+# ─────────────────────────────────────────────────────────────────────────────
+
+staged=$(git diff --cached --name-only 2>/dev/null)
+
+if [ -z "$staged" ]; then
+  exit 0
+fi
+
+code_files=$(echo "$staged" | grep -E "^src/|^supabase/functions/|^supabase/migrations/" || true)
+doc_files=$(echo "$staged" | grep -E "^docs/|^\.agents/skills/|^CLAUDE\.md" || true)
+
+# ── Gate 1: code staged without ANY doc → blocked ────────────────────────────
+if [ -n "$code_files" ] && [ -z "$doc_files" ]; then
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "PRE-COMMIT BLOCKED — no doc/skill update found in this commit"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  echo "Source files staged:"
+  echo "$code_files" | sed 's/^/    /'
+  echo ""
+  echo "Update the matching doc/skill file and stage it alongside your code."
+  echo ""
+  exit 1
+fi
+
+# ── Gate 5: TypeScript type-check ────────────────────────────────────────────
+ts_src=$(echo "$staged" | grep -E "^src/.*\.(ts|tsx)$" || true)
+if [ -n "$ts_src" ] && command -v npx >/dev/null 2>&1; then
+  tsc_output=$(npx tsc -p tsconfig.app.json --noEmit 2>&1)
+  tsc_exit=$?
+  if [ $tsc_exit -ne 0 ]; then
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "PRE-COMMIT BLOCKED — TypeScript errors"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "$tsc_output" | grep "error TS" | head -20
+    echo ""
+    exit 1
+  fi
+fi
+
+# ── Gate 7: Vitest test suite ────────────────────────────────────────────────
+if [ -n "$ts_src" ] && command -v npx >/dev/null 2>&1; then
+  vitest_output=$(npx vitest run 2>&1)
+  vitest_exit=$?
+  if [ $vitest_exit -ne 0 ]; then
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "PRE-COMMIT BLOCKED — test suite failed"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "$vitest_output" | grep -E "FAIL|Error|expected|received" | head -20
+    echo ""
+    exit 1
+  fi
+fi
+
+# ── Gate 8: test files → agent knowledge update ──────────────────────────────
+test_files=$(echo "$staged" | grep -E "\.(test|spec)\.(ts|tsx)$" || true)
+if [ -n "$test_files" ]; then
+  agent_files=$(echo "$staged" | grep -E "^\.claude/agents/.*\.md$" || true)
+  if [ -z "$agent_files" ]; then
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "PRE-COMMIT BLOCKED — test files staged, no agent was informed"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "Test file(s):"
+    echo "$test_files" | sed 's/^/    /'
+    echo ""
+    echo "Stage at least one .claude/agents/*.md with the test knowledge."
+    echo ""
+    exit 1
+  fi
+fi
+
+exit 0

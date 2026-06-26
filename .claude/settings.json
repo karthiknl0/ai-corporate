@@ -1,0 +1,37 @@
+{
+  "model": "sonnet",
+  "advisorModel": "opus",
+  "permissions": {
+    "allow": [
+      "Edit",
+      "Write",
+      "Read",
+      "Bash(git *)",
+      "Bash(npm run:*)",
+      "Bash(npm install:*)"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Edit(.env)",
+      "Edit(.env.*)",
+      "Write(.env)",
+      "Write(.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/route-guard.mjs",
+            "timeout": 10,
+            "statusMessage": "Checking specialist-routing policy..."
+          }
+        ]
+      }
+    ]
+  }
+}
