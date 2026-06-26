@@ -160,6 +160,58 @@ Edit `.githooks/pre-commit` to enable or disable gates based on your project's n
 
 ---
 
+## How the System Works
+
+AI Corporate operates on a **three-tier cost model** where every task is routed to the cheapest model that can handle it:
+
+| Tier | Model | Output Cost | Role |
+|------|-------|------------|------|
+| **Opus** ($75/MTok output) | Senior leadership | 60x Haiku | Judgment, architecture, approvals |
+| **Sonnet** ($15/MTok output) | Specialists | 12x Haiku | Domain expertise, implementation |
+| **Haiku** ($1.25/MTok output) | Workers | Baseline | Verification, grep, docs, mechanical tasks |
+
+This produces **40-50% token savings** compared to routing everything through the most capable model. The savings come from high-volume mechanical tasks (verification, docs, grep) running on Haiku at 1/60th the cost of Opus.
+
+For the full operational methodology, see **[How It Works](docs/how-it-works.md)** -- covering parallel execution, the orchestrator pattern, agent lifecycle, and the pre-commit gate pipeline.
+
+For detailed pricing, decision matrices, and anti-patterns, see **[Cost Model](docs/cost-model.md)**.
+
+### Session Example: Parallel Execution Flow
+
+When a user requests a new feature, the system executes in parallel rather than sequentially:
+
+```
+User: "Add an inventory report with API endpoint"
+
+1. Orchestrator reads routing table, spawns Planner (opus)
+2. Planner returns sub-tasks:
+   - DB query (postgres specialist)
+   - Report component (frontend specialist)
+   - Edge function (edge-fn specialist)
+   - Tests (QA engineer)
+   - Docs (docs scribe)
+
+3. Orchestrator spawns in parallel (all background):
+   +-- Postgres specialist (sonnet) --> writes query
+   +-- QA engineer (sonnet)         --> writes tests
+   +-- Docs scribe (haiku)          --> prepares doc updates
+   |
+   (orchestrator stays free for other work)
+   |
+4. Sequential follow-ups (depend on DB output):
+   +-- Frontend specialist (sonnet) --> builds component
+   +-- Edge-fn specialist (sonnet)  --> implements endpoint
+
+5. Orchestrator verifies: build + typecheck + tests + deno check
+6. Commits code + docs together (pre-commit gates enforce pairing)
+7. Deploys after user approval (safety gate)
+8. Skill-updater audits agent knowledge (same commit)
+```
+
+The orchestrator never does specialist work inline. It coordinates, verifies, and holds all approval gates. Specialists report back; the orchestrator decides.
+
+---
+
 ## Directory Structure
 
 ```
