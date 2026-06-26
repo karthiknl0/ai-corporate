@@ -3,149 +3,418 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>your project ERP — Agent Workforce</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<title>AI Corporate — Agent Workforce</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--surface-2:#fff;--surface-1:#f8f9fa;--text-primary:#1a1a1a;--text-secondary:#6b7280;--text-muted:#9ca3af;--border:#e5e7eb;--border-strong:#d1d5db;--bg-accent:#eff6ff;--text-accent:#2563eb;--font-sans:system-ui,-apple-system,sans-serif;--font-mono:'SF Mono',Consolas,monospace;--radius:8px}
-@media(prefers-color-scheme:dark){:root{--surface-2:#1a1a1a;--surface-1:#262626;--text-primary:#f0f0f0;--text-secondary:#9ca3af;--text-muted:#6b7280;--border:#374151;--border-strong:#4b5563;--bg-accent:#1e3a5f;--text-accent:#60a5fa}}
-body{font-family:var(--font-sans);background:var(--surface-2);color:var(--text-primary);padding:2rem;max-width:1200px;margin:0 auto}
-h1{font-size:22px;font-weight:500;margin-bottom:0.5rem}
-.subtitle{font-size:14px;color:var(--text-secondary);margin-bottom:1.5rem}
-.org{padding:1rem 0}
-.tier{margin-bottom:1.5rem}
-.tier-head{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem;padding-bottom:0.4rem;border-bottom:2px solid var(--border)}
-.tier-label{font-size:13px;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px}
-.tier-badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500}
-.t-opus .tier-badge{background:var(--bg-accent);color:var(--text-accent)}
-.t-sonnet .tier-badge{background:#E1F5EE;color:#0F6E56}
-.t-haiku .tier-badge{background:#FFF3E0;color:#993C1D}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:0.5rem}
-.card{border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem 0.75rem;cursor:pointer;transition:border-color 0.15s;background:var(--surface-1)}
-.card:hover{border-color:var(--border-strong)}
-.card-top{display:flex;align-items:center;gap:0.5rem;margin-bottom:0.25rem}
-.avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
-.a-opus{background:var(--bg-accent);color:var(--text-accent)}
-.a-sonnet{background:#E1F5EE;color:#0F6E56}
-.a-haiku{background:#FFF3E0;color:#993C1D}
-.name{font-size:14px;font-weight:500;color:var(--text-primary)}
-.slug{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
-.role{font-size:12px;color:var(--text-secondary);line-height:1.4;margin-top:2px}
-.detail{display:none;margin-top:0.4rem;padding-top:0.4rem;border-top:1px solid var(--border);font-size:12px;color:var(--text-secondary);line-height:1.5}
-.card.open .detail{display:block}
-.card.open{border-color:var(--border-strong)}
-.stats{display:flex;gap:1.5rem;margin-bottom:1rem;flex-wrap:wrap}
-.stat{text-align:center}
-.stat-num{font-size:28px;font-weight:500;color:var(--text-primary)}
-.stat-label{font-size:12px;color:var(--text-secondary)}
-.filter-bar{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
-.fbtn{font-size:12px;padding:4px 12px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);cursor:pointer;font-family:var(--font-sans)}
-.fbtn:hover{border-color:var(--border-strong)}
-.fbtn.active{background:var(--text-primary);color:var(--surface-2);border-color:var(--text-primary)}
-@media(prefers-color-scheme:dark){
-.t-sonnet .tier-badge{background:#085041;color:#5DCAA5}
-.t-haiku .tier-badge{background:#4A1B0C;color:#F0997B}
-.a-sonnet{background:#085041;color:#5DCAA5}
-.a-haiku{background:#4A1B0C;color:#F0997B}
+:root{
+  --surface-bg:#ffffff;
+  --surface-card:#f8f9fa;
+  --text-primary:#1a1a1a;
+  --text-secondary:#6b7280;
+  --text-muted:#9ca3af;
+  --border:#e5e7eb;
+  --font-sans:system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'SF Mono','Cascadia Code',Consolas,monospace;
+  --radius:6px;
+  --opus:#6366f1;
+  --opus-bg:#eef2ff;
+  --opus-border:#c7d2fe;
+  --sonnet:#0d9488;
+  --sonnet-bg:#f0fdfa;
+  --sonnet-border:#99f6e4;
+  --haiku:#ea580c;
+  --haiku-bg:#fff7ed;
+  --haiku-border:#fed7aa;
+  --stats-bg:#f1f5f9;
+}
+@media(prefers-color-scheme:dark){:root{
+  --surface-bg:#111111;
+  --surface-card:#1e1e1e;
+  --text-primary:#e8e8e8;
+  --text-secondary:#9ca3af;
+  --text-muted:#6b7280;
+  --border:#2e2e2e;
+  --opus:#818cf8;
+  --opus-bg:#1e1b4b;
+  --opus-border:#3730a3;
+  --sonnet:#2dd4bf;
+  --sonnet-bg:#042f2e;
+  --sonnet-border:#115e59;
+  --haiku:#fb923c;
+  --haiku-bg:#431407;
+  --haiku-border:#7c2d12;
+  --stats-bg:#1a1a1a;
+}}
+body{font-family:var(--font-sans);background:var(--surface-bg);color:var(--text-primary);padding:2rem 1.5rem;max-width:1100px;margin:0 auto;line-height:1.5}
+
+/* Header */
+header{margin-bottom:2rem}
+h1{font-size:24px;font-weight:600;letter-spacing:-0.02em}
+.subtitle{font-size:14px;color:var(--text-secondary);margin-top:4px}
+
+/* Stats bar */
+.stats{display:flex;gap:1rem;flex-wrap:wrap;padding:12px 16px;background:var(--stats-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.5rem;font-size:13px}
+.stat{display:flex;align-items:center;gap:6px}
+.stat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.stat-dot.all{background:var(--text-secondary)}
+.stat-dot.opus{background:var(--opus)}
+.stat-dot.sonnet{background:var(--sonnet)}
+.stat-dot.haiku{background:var(--haiku)}
+.stat-label{color:var(--text-secondary)}
+.stat-count{font-weight:600}
+
+/* Filter buttons */
+.filters{display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
+.filter-btn{border:1px solid var(--border);background:var(--surface-card);color:var(--text-secondary);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.15s;font-family:var(--font-sans)}
+.filter-btn:hover{border-color:var(--text-muted)}
+.filter-btn.active{color:var(--text-primary);border-color:var(--text-primary);font-weight:600}
+.filter-btn.active[data-filter="opus"]{color:var(--opus);border-color:var(--opus)}
+.filter-btn.active[data-filter="sonnet"]{color:var(--sonnet);border-color:var(--sonnet)}
+.filter-btn.active[data-filter="haiku"]{color:var(--haiku);border-color:var(--haiku)}
+
+/* Tier sections */
+.tier{margin-bottom:2rem}
+.tier-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.tier-title{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-secondary)}
+.tier-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px}
+.tier-opus .tier-badge{background:var(--opus-bg);color:var(--opus);border:1px solid var(--opus-border)}
+.tier-sonnet .tier-badge{background:var(--sonnet-bg);color:var(--sonnet);border:1px solid var(--sonnet-border)}
+.tier-haiku .tier-badge{background:var(--haiku-bg);color:var(--haiku);border:1px solid var(--haiku-border)}
+
+/* Card grid */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+
+/* Cards */
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:14px;cursor:pointer;transition:border-color 0.15s;background:var(--surface-card)}
+.card:hover{border-color:var(--text-muted)}
+.card.hidden{display:none}
+.card-top{display:flex;align-items:center;gap:10px}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;color:#fff}
+.card.opus .avatar{background:var(--opus)}
+.card.sonnet .avatar{background:var(--sonnet)}
+.card.haiku .avatar{background:var(--haiku)}
+.card-info{min-width:0}
+.card-name{font-size:14px;font-weight:600}
+.card-slug{font-size:11px;font-family:var(--font-mono);color:var(--text-muted)}
+.card-role{font-size:12px;color:var(--text-secondary);margin-top:6px;line-height:1.4}
+.card-detail{font-size:12px;color:var(--text-secondary);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.5;display:none}
+.card.expanded .card-detail{display:block}
+.card.expanded{border-color:var(--text-muted)}
+
+/* Footer */
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+footer code{font-family:var(--font-mono);background:var(--surface-card);padding:2px 6px;border-radius:3px;border:1px solid var(--border)}
+
+@media(max-width:600px){
+  body{padding:1rem}
+  .card-grid{grid-template-columns:1fr}
+  .stats{flex-direction:column;gap:6px}
 }
 </style>
 </head>
 <body>
-<h1>your project ERP — Agent workforce</h1>
-<p class="subtitle">Interactive org chart. Click any card to expand. Filter by model tier or domain.</p>
-<div class="org">
+
+<header>
+  <h1>AI Corporate &mdash; Agent Workforce</h1>
+  <p class="subtitle">20 universal agents. Fork and add your domain specialists.</p>
+</header>
+
 <div class="stats">
-<div class="stat"><div class="stat-num">45</div><div class="stat-label">Total employees</div></div>
-<div class="stat"><div class="stat-num">10</div><div class="stat-label">Senior leadership (opus)</div></div>
-<div class="stat"><div class="stat-num">19</div><div class="stat-label">Specialists (sonnet)</div></div>
-<div class="stat"><div class="stat-num">10</div><div class="stat-label">Workers (haiku)</div></div>
-<div class="stat"><div class="stat-num">6</div><div class="stat-label">Auditors (mixed)</div></div>
-</div>
-<div class="filter-bar">
-<button class="fbtn active" onclick="filterCards('all')">All</button>
-<button class="fbtn" onclick="filterCards('opus')">Opus</button>
-<button class="fbtn" onclick="filterCards('sonnet')">Sonnet</button>
-<button class="fbtn" onclick="filterCards('haiku')">Haiku</button>
-<button class="fbtn" onclick="filterCards('db')"><i class="ti ti-database" aria-hidden="true"></i> Database</button>
-<button class="fbtn" onclick="filterCards('ui')"><i class="ti ti-layout" aria-hidden="true"></i> UI / Frontend</button>
-<button class="fbtn" onclick="filterCards('security')"><i class="ti ti-shield" aria-hidden="true"></i> Security</button>
+  <div class="stat"><span class="stat-dot all"></span><span class="stat-label">Total</span><span class="stat-count">20</span></div>
+  <div class="stat"><span class="stat-dot opus"></span><span class="stat-label">Senior Leadership (Opus)</span><span class="stat-count">4</span></div>
+  <div class="stat"><span class="stat-dot sonnet"></span><span class="stat-label">Domain Specialists (Sonnet)</span><span class="stat-count">10</span></div>
+  <div class="stat"><span class="stat-dot haiku"></span><span class="stat-label">Workers (Haiku)</span><span class="stat-count">6</span></div>
 </div>
 
-<div class="tier t-opus">
-<div class="tier-head"><span class="tier-label">Senior leadership</span><span class="tier-badge">Opus</span></div>
-<div class="grid">
-<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">PR</div><div><div class="name">Priya</div><div class="slug">product-owner</div></div></div><div class="role">Business requirements to tech specs</div><div class="detail">Translates GST circulars, customer requests, and textile-industry workflows into precise technical specs with acceptance criteria. Does not write code.</div></div>
-<div class="card" data-model="opus" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AR</div><div><div class="name">Arjun</div><div class="slug">senior-data-architect</div></div></div><div class="role">Schema strategy and data governance</div><div class="detail">Add column vs new table, archival design, migration sequencing, multi-tenant isolation. Wrong schema decisions compound — this role prevents them.</div></div>
-<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">VK</div><div><div class="name">Vikram</div><div class="slug">incident-commander</div></div></div><div class="role">Production incident coordination</div><div class="detail">Triage order, rollback-vs-fix-forward, all-clear. Coordinates multi-agent incident response. Never fixes — issues decisions.</div></div>
-<div class="card" data-model="opus" data-domain="ui planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">RJ</div><div><div class="name">Rajan</div><div class="slug">senior-engineer</div></div></div><div class="role">Cross-cutting architecture decisions</div><div class="detail">Blast-radius assessment, arch decisions spanning 3+ domains, implementation spec + agent delegation plans.</div></div>
-<div class="card" data-model="opus" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">KR</div><div><div class="name">Kiran</div><div class="slug">senior-security-advisor</div></div></div><div class="role">Threat modeling and security posture</div><div class="detail">Opus-grade judgment on findings, remediation priority, and agent assignment. Supersedes security-auditor for critical decisions.</div></div>
-<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">SH</div><div><div class="name">Shreya</div><div class="slug">senior-planner</div></div></div><div class="role">Multi-phase task decomposition</div><div class="detail">Decomposes work into ordered phases, assigns agents, flags risks and gates, estimates token cost per phase.</div></div>
-<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">GU</div><div><div class="name">Guru</div><div class="slug">senior-guide</div></div></div><div class="role">your project-specific domain guidance</div><div class="detail">"How should we approach X in this repo?" Definitive answers on architecture, patterns, agent routing, safety gates.</div></div>
-<div class="card" data-model="opus" data-domain="planning" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AN</div><div><div class="name">Ananya</div><div class="slug">senior-hr</div></div></div><div class="role">Task routing and agent delegation</div><div class="detail">Routes tasks to cheapest capable agent tier, writes delegation prompts, prevents over-spending on Sonnet/Opus for Haiku-level work.</div></div>
-<div class="card" data-model="opus" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">AA</div><div><div class="name">Aarav</div><div class="slug">refactoring-lead</div></div></div><div class="role">Cross-cutting file splits and dead-code</div><div class="detail">Systematic tech-debt campaigns: splitting 1500+ line files, removing dead code, consolidating duplicate utilities.</div></div>
-<div class="card" data-model="opus" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">DH</div><div><div class="name">Dharma</div><div class="slug">compliance-officer</div></div></div><div class="role">DPDP / PCI-DSS / GST compliance</div><div class="detail">Indian regulatory compliance analysis across DPDP Act, PCI-DSS payment data, and GST audit-trail requirements.</div></div>
-<div class="card" data-model="opus" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-opus">NK</div><div><div class="name">Nakul</div><div class="slug">debugger</div></div></div><div class="role">Hard / multi-system bug root-cause</div><div class="detail">Structured isolate, hypothesize, verify cycle for bugs involving React + DB + edge functions. Produces root-cause explanations.</div></div>
-</div>
+<div class="filters">
+  <button class="filter-btn active" data-filter="all">All (20)</button>
+  <button class="filter-btn" data-filter="opus">Opus (4)</button>
+  <button class="filter-btn" data-filter="sonnet">Sonnet (10)</button>
+  <button class="filter-btn" data-filter="haiku">Haiku (6)</button>
 </div>
 
-<div class="tier t-sonnet">
-<div class="tier-head"><span class="tier-label">Domain specialists</span><span class="tier-badge">Sonnet</span></div>
-<div class="grid">
-<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">DP</div><div><div class="name">Deepak</div><div class="slug">postgres-writer</div></div></div><div class="role">Approved DB writes / DDL / migration apply</div><div class="detail">INSERT, UPDATE, DELETE, DDL on live Supabase. Only after user approval. Always verifies with SELECT after write.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">TJ</div><div><div class="name">Tejas</div><div class="slug">typescript-pro</div></div></div><div class="role">Complex TS errors and generics</div><div class="detail">Advanced TypeScript: complex type errors, generic constraints, discriminated unions, strict-mode violations, your project tsconfig patterns.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RY</div><div><div class="name">Riya</div><div class="slug">react-specialist</div></div></div><div class="role">React re-renders / TanStack cache / perf</div><div class="detail">Unnecessary re-renders, missing memo/useCallback, Suspense, stale closures, state batching, TanStack Query cache design.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">GV</div><div><div class="name">Govind</div><div class="slug">gst-specialist</div></div></div><div class="role">GST: e-invoice, e-way, GSTR, tax slabs</div><div class="detail">Indian GST law + all your project GST skill files. E-invoice IRN, e-way bills, GSTR-2B reconciliation, HSN codes, reverse charge.</div></div>
-<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SU</div><div><div class="name">Surya</div><div class="slug">edge-fn-specialist</div></div></div><div class="role">Deno edge functions / RPC write+debug</div><div class="detail">supabase/functions/, voucher-posting RPCs, _shared/ utilities, deploy commands, fallback-removal safety.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">LK</div><div><div class="name">Lakshmi</div><div class="slug">voucher-accounting</div></div></div><div class="role">VoucherEntry / bank-reco / ledger / payments</div><div class="detail">4300-line VoucherEntry, bank reconciliation, ledger statement, voucher view/print, payment summary hooks, double-entry model.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VR</div><div><div class="name">Varun</div><div class="slug">sales-purchase</div></div></div><div class="role">Sale/Purchase create, edit, view, list, convert</div><div class="detail">Owns the mirror-domain rule (sale to purchase). Document totals, GST split, returns, conversions (PO to bill, SO to invoice).</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">KT</div><div><div class="name">Karthik</div><div class="slug">jobwork-specialist</div></div></div><div class="role">Jobwork Out/In/Bills/Outstanding</div><div class="detail">Jobwork cycle: Out rates, In receive/confirm/splits/addon-sync, bill posting (TDS, round-off), jobwork stock deltas.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">MR</div><div><div class="name">Meera</div><div class="slug">storefront-portal</div></div></div><div class="role">B2C storefront / B2B portal / b2c-auth</div><div class="detail">Customer-facing pages: shop/*, portal/*, b2c-auth edge fn (non-JWT sessions), cart/checkout, order placement.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RH</div><div><div class="name">Rohan</div><div class="slug">reports-print</div></div></div><div class="role">Reports hub / ledger exports / print, PDF</div><div class="detail">Reports.tsx, ledger statement CSV/PDF, print models, page-break fixes, HTML export builders.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">CH</div><div><div class="name">Chandra</div><div class="slug">mutation-auditor</div></div></div><div class="role">Mutation side-effect chain audit</div><div class="detail">Cache invalidation, stock deltas, ledger entries, edge function triggers, document status changes, mirror-domain gaps.</div></div>
-<div class="card" data-model="sonnet" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">PV</div><div><div class="name">Parvati</div><div class="slug">security-boundary</div></div></div><div class="role">RLS / tenant isolation / endpoint audit</div><div class="detail">New public endpoint, RPC, portal page, table — RLS correctness, tenant_id enforcement, anon vs authenticated, secret exposure.</div></div>
-<div class="card" data-model="sonnet" data-domain="security" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SV</div><div><div class="name">Shiva</div><div class="slug">security-auditor</div></div></div><div class="role">Security audit phases (Tier 1/2/3)</div><div class="detail">OWASP playbooks, SECURITY-AUDIT.md tracker, severity-ranked findings. Diagnoses only — never fixes.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">AK</div><div><div class="name">Anika</div><div class="slug">integration-specialist</div></div></div><div class="role">WhatsApp / GST API / R2 / SMS integrations</div><div class="detail">External API integrations: WhatsApp Meta Cloud API, NIC e-invoice/e-way, R2, SMS providers, webhooks, retry logic.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VJ</div><div><div class="name">Vijay</div><div class="slug">performance-engineer</div></div></div><div class="role">Bundle size / VPS latency / cold-start</div><div class="detail">Vite bundle, VPS response, Supabase query timing, edge fn cold-start, Core Web Vitals, TanStack cache efficiency.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">NS</div><div><div class="name">Nisha</div><div class="slug">qa-engineer</div></div></div><div class="role">Test cases, smoke tests, E2E scenarios</div><div class="detail">Designs and writes the first tests for your project features. No existing test suite — builds from scratch using APP-GUIDE.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">KK</div><div><div class="name">Kritika</div><div class="slug">code-reviewer</div></div></div><div class="role">PR/diff review against your project patterns</div><div class="detail">Mirror-domain, select("*") ban, blast-radius, component-architecture, large-file rule, double-entry correctness.</div></div>
-<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">RV</div><div><div class="name">Ravi</div><div class="slug">devops-engineer</div></div></div><div class="role">VPS ops: Docker, Nginx, deploy scripts</div><div class="detail">Container management, Supabase compose, SSL/TLS, cron jobs on VPS, SSH admin. Never self-approves prod changes.</div></div>
-<div class="card" data-model="sonnet" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">SG</div><div><div class="name">Sagar</div><div class="slug">data-migrator</div></div></div><div class="role">Tally/CSV import and bulk data transforms</div><div class="detail">Tally import scripts, CSV ingestion, opening-balance migration files. Orchestrator approves before any data apply.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">MT</div><div><div class="name">Mitra</div><div class="slug">code-mapper</div></div></div><div class="role">Large-file code-map skill creation</div><div class="detail">Creates/updates mandatory code-map skills for 1500+ line files. Reads big files, extracts line-anchored structure, writes the skill.</div></div>
-<div class="card" data-model="sonnet" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-sonnet">VD</div><div><div class="name">Vidya</div><div class="slug">skill-updater</div></div></div><div class="role">Auto skill maintenance on every commit</div><div class="detail">Triggered on code changes. Reads changed code + current skill, rewrites stale sections. Never invents — all updates grounded in source.</div></div>
-</div>
+<div id="org">
+
+  <!-- Senior Leadership (Opus) -->
+  <div class="tier tier-opus" data-tier="opus">
+    <div class="tier-header">
+      <span class="tier-title">Senior Leadership</span>
+      <span class="tier-badge">Opus</span>
+    </div>
+    <div class="card-grid">
+      <div class="card opus" data-tier="opus" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">AN</div>
+          <div class="card-info">
+            <div class="card-name">Ananya</div>
+            <div class="card-slug">senior-hr</div>
+          </div>
+        </div>
+        <div class="card-role">Task routing + recruitment approval</div>
+        <div class="card-detail">Routes incoming tasks to the cheapest capable agent tier and writes the delegation prompt. Approves recruitment of new specialist agents and maintains workforce composition. The first stop for any new task entering the system.</div>
+      </div>
+      <div class="card opus" data-tier="opus" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">SH</div>
+          <div class="card-info">
+            <div class="card-name">Shreya</div>
+            <div class="card-slug">senior-planner</div>
+          </div>
+        </div>
+        <div class="card-role">Multi-phase task decomposition</div>
+        <div class="card-detail">Breaks complex tasks with three or more moving parts into ordered phases with agent assignments. Produces structured execution plans that downstream agents follow. Ensures work is sequenced to avoid conflicts and maximize parallelism.</div>
+      </div>
+      <div class="card opus" data-tier="opus" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">RA</div>
+          <div class="card-info">
+            <div class="card-name">Rajan</div>
+            <div class="card-slug">senior-engineer</div>
+          </div>
+        </div>
+        <div class="card-role">Cross-cutting architecture decisions</div>
+        <div class="card-detail">Owns architectural decisions that span three or more domains. Performs blast-radius assessments for cross-cutting refactors and approves changes that affect shared contracts. The final authority on structural design choices.</div>
+      </div>
+      <div class="card opus" data-tier="opus" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">NA</div>
+          <div class="card-info">
+            <div class="card-name">Nakul</div>
+            <div class="card-slug">debugger</div>
+          </div>
+        </div>
+        <div class="card-role">Multi-system root-cause analysis</div>
+        <div class="card-detail">Investigates hard bugs with unclear root causes that span multiple systems. Uses methodical elimination to trace failures across service boundaries. Produces actionable diagnosis reports with verified reproduction steps.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Domain Specialists (Sonnet) -->
+  <div class="tier tier-sonnet" data-tier="sonnet">
+    <div class="tier-header">
+      <span class="tier-title">Domain Specialists</span>
+      <span class="tier-badge">Sonnet</span>
+    </div>
+    <div class="card-grid">
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">DE</div>
+          <div class="card-info">
+            <div class="card-name">Deepak</div>
+            <div class="card-slug">postgres-writer</div>
+          </div>
+        </div>
+        <div class="card-role">Approved DB writes / DDL</div>
+        <div class="card-detail">Executes approved database writes, DDL changes, and migration applications. Only acts after explicit human approval through the orchestrator. Handles schema changes, data backfills, and structural modifications to production databases.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">TE</div>
+          <div class="card-info">
+            <div class="card-name">Tejas</div>
+            <div class="card-slug">typescript-pro</div>
+          </div>
+        </div>
+        <div class="card-role">Complex TS errors / generics</div>
+        <div class="card-detail">Resolves complex TypeScript compilation errors involving generics, conditional types, and type inference. Untangles intricate type hierarchies and fixes type-level bugs that block builds. The go-to for anything beyond routine type annotations.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">RI</div>
+          <div class="card-info">
+            <div class="card-name">Riya</div>
+            <div class="card-slug">react-specialist</div>
+          </div>
+        </div>
+        <div class="card-role">React re-renders / TanStack cache</div>
+        <div class="card-detail">Diagnoses and fixes React performance issues including unnecessary re-renders, stale closures, and TanStack Query cache invalidation problems. Optimizes component rendering paths and data-fetching strategies.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">KR</div>
+          <div class="card-info">
+            <div class="card-name">Kritika</div>
+            <div class="card-slug">code-reviewer</div>
+          </div>
+        </div>
+        <div class="card-role">PR/diff review against patterns</div>
+        <div class="card-detail">Reviews pull requests and diffs against established codebase patterns. Catches anti-patterns, missing edge cases, and style violations. Produces structured review feedback with actionable fix suggestions.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">MI</div>
+          <div class="card-info">
+            <div class="card-name">Mitra</div>
+            <div class="card-slug">code-mapper</div>
+          </div>
+        </div>
+        <div class="card-role">Large-file code-map creation</div>
+        <div class="card-detail">Creates structured code maps for large files exceeding 1,500 lines. Documents section boundaries, key functions, and navigation anchors so that other agents can work on large files without reading them in full.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">VI</div>
+          <div class="card-info">
+            <div class="card-name">Vidya</div>
+            <div class="card-slug">skill-updater</div>
+          </div>
+        </div>
+        <div class="card-role">Auto skill maintenance</div>
+        <div class="card-detail">Automatically updates skill files when code changes touch a skill's domain. Keeps documentation synchronized with source code. Runs as part of every commit's doc-pairing step to prevent skill drift.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">NI</div>
+          <div class="card-info">
+            <div class="card-name">Nisha</div>
+            <div class="card-slug">qa-engineer</div>
+          </div>
+        </div>
+        <div class="card-role">Test design + coverage planning</div>
+        <div class="card-detail">Designs new test cases, smoke tests, and end-to-end scenarios. Plans test coverage strategy and identifies gaps. Produces test specifications that the test-maintenance worker implements mechanically.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">RV</div>
+          <div class="card-info">
+            <div class="card-name">Ravi</div>
+            <div class="card-slug">devops-engineer</div>
+          </div>
+        </div>
+        <div class="card-role">VPS/Docker/deploy ops</div>
+        <div class="card-detail">Manages VPS operations including Docker containers, Nginx configuration, deploy scripts, and SSH administration. Handles infrastructure changes that have been approved by the orchestrator. Maintains deployment pipelines.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">SH</div>
+          <div class="card-info">
+            <div class="card-name">Shiva</div>
+            <div class="card-slug">security-auditor</div>
+          </div>
+        </div>
+        <div class="card-role">Security audit (Tier 1/2/3)</div>
+        <div class="card-detail">Runs structured security audits across three tiers of increasing depth. Produces read-only diagnostic reports identifying vulnerabilities, misconfigurations, and exposure risks. Never remediates directly; findings go to the orchestrator for approval.</div>
+      </div>
+      <div class="card sonnet" data-tier="sonnet" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">PA</div>
+          <div class="card-info">
+            <div class="card-name">Parvati</div>
+            <div class="card-slug">security-boundary-auditor</div>
+          </div>
+        </div>
+        <div class="card-role">RLS / tenant isolation audit</div>
+        <div class="card-detail">Audits row-level security policies, tenant isolation boundaries, and secret exposure risks. Reviews new tables, RPCs, and public endpoints for access-control gaps. Read-only diagnostics reported to the orchestrator.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Workers (Haiku) -->
+  <div class="tier tier-haiku" data-tier="haiku">
+    <div class="tier-header">
+      <span class="tier-title">Workers</span>
+      <span class="tier-badge">Haiku</span>
+    </div>
+    <div class="card-grid">
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">AD</div>
+          <div class="card-info">
+            <div class="card-name">Anand</div>
+            <div class="card-slug">verifier</div>
+          </div>
+        </div>
+        <div class="card-role">Build/typecheck/test verification</div>
+        <div class="card-detail">Runs the verification suite: build, typecheck, deno check, regrep, and smoke tests. Reports pass/fail results to the orchestrator. Read-only worker that never edits or commits code.</div>
+      </div>
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">SA</div>
+          <div class="card-info">
+            <div class="card-name">Saras</div>
+            <div class="card-slug">docs-scribe</div>
+          </div>
+        </div>
+        <div class="card-role">Multi-file doc updates from spec</div>
+        <div class="card-detail">Performs multi-file documentation updates from a provided specification. Edits docs and skill files only, never invents content beyond the spec, and never commits. Hands results back to the orchestrator for review.</div>
+      </div>
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">GI</div>
+          <div class="card-info">
+            <div class="card-name">Gita</div>
+            <div class="card-slug">grep-reporter</div>
+          </div>
+        </div>
+        <div class="card-role">Batch codebase search</div>
+        <div class="card-detail">Runs batch grep and search operations across the codebase for a list of patterns. Compiles results into structured tables to save main-context tokens on broad surveys. Read-only, never edits or commits.</div>
+      </div>
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">PR</div>
+          <div class="card-info">
+            <div class="card-name">Prasad</div>
+            <div class="card-slug">postgres-pro</div>
+          </div>
+        </div>
+        <div class="card-role">READ-ONLY DB: EXPLAIN, schema</div>
+        <div class="card-detail">Handles read-only database operations: query optimization with EXPLAIN, schema inspection, index analysis, and RLS audits. Never writes to the database. Used for investigation and planning before approved writes.</div>
+      </div>
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">KA</div>
+          <div class="card-info">
+            <div class="card-name">Kavya</div>
+            <div class="card-slug">comms-manager</div>
+          </div>
+        </div>
+        <div class="card-role">PR descriptions, changelogs</div>
+        <div class="card-detail">Generates PR descriptions, changelogs, release notes, and customer announcements from diffs. Pure writing worker with no code editing capability. Produces polished communication artifacts from technical changes.</div>
+      </div>
+      <div class="card haiku" data-tier="haiku" onclick="toggleCard(this)">
+        <div class="card-top">
+          <div class="avatar">AS</div>
+          <div class="card-info">
+            <div class="card-name">Asha</div>
+            <div class="card-slug">accessibility-tester</div>
+          </div>
+        </div>
+        <div class="card-role">WCAG a11y audit</div>
+        <div class="card-detail">Performs WCAG accessibility audits on portal and storefront pages. Identifies contrast issues, missing ARIA labels, keyboard navigation gaps, and screen-reader compatibility problems. Reports findings for remediation.</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<div class="tier t-haiku">
-<div class="tier-head"><span class="tier-label">Workers and auditors</span><span class="tier-badge">Haiku</span></div>
-<div class="grid">
-<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">PS</div><div><div class="name">Prasad</div><div class="slug">postgres-pro</div></div></div><div class="role">READ-ONLY DB: EXPLAIN, index, schema</div><div class="detail">Query optimization, EXPLAIN analysis, index recommendations, RLS audits, migration review, slow query diagnosis.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">AD</div><div><div class="name">Anand</div><div class="slug">verifier</div></div></div><div class="role">Build/typecheck/deno:check verification</div><div class="detail">Runs the full verification suite and reports pass/fail with evidence. Read-only — never edits, commits, or deploys.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">SR</div><div><div class="name">Saras</div><div class="slug">docs-scribe</div></div></div><div class="role">Multi-file doc-pairing from spec</div><div class="detail">Applies orchestrator's doc update spec across multiple skill/doc files. Never invents facts, never commits.</div></div>
-<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">MN</div><div><div class="name">Manu</div><div class="slug">migration-file-writer</div></div></div><div class="role">Write migration SQL file (no execute)</div><div class="detail">Takes exact SQL from orchestrator, writes to supabase/migrations/. No SQL design, no judgment, no DB execution.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">LL</div><div><div class="name">Leela</div><div class="slug">linter-worker</div></div></div><div class="role">ESLint / Prettier / regrep checks</div><div class="detail">Runs lint and format checks, reports violations with file:line. Never fixes — just reports.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">GT</div><div><div class="name">Gita</div><div class="slug">grep-reporter</div></div></div><div class="role">Batch codebase search and pattern tables</div><div class="detail">Runs a batch of grep patterns and compiles results. Saves main-context tokens on broad surveys.</div></div>
-<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">LT</div><div><div class="name">Lata</div><div class="slug">log-monitor</div></div></div><div class="role">VPS Docker/Kong/edge-fn log triage</div><div class="detail">Reads container logs, extracts error patterns, returns structured summary. Never restarts or fixes.</div></div>
-<div class="card" data-model="haiku" data-domain="db" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">BL</div><div><div class="name">Bala</div><div class="slug">bi-analyst</div></div></div><div class="role">Read-only analytics SQL</div><div class="detail">Sales summaries, inventory aging, outstanding, top items by revenue. SELECT only, always tenant-scoped.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">KV</div><div><div class="name">Kavya</div><div class="slug">comms-manager</div></div></div><div class="role">PR descriptions, changelogs, release notes</div><div class="detail">Generates user-facing writing from git diffs or feature descriptions. Pure writing — no code changes.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">AS</div><div><div class="name">Asha</div><div class="slug">accessibility-tester</div></div></div><div class="role">WCAG a11y audit (portal/shop)</div><div class="detail">WCAG 2.1 AA, keyboard navigation, screen reader, color contrast, touch targets, ARIA patterns.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">ST</div><div><div class="name">Sita</div><div class="slug">stock-integrity-auditor</div></div></div><div class="role">Stock-ledger correctness audit</div><div class="detail">Verifies stock_ledger deltas after mutations. Audits and reports with evidence — never fixes.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">DN</div><div><div class="name">Dhana</div><div class="slug">financial-auditor</div></div></div><div class="role">Double-entry / payment / ledger audit</div><div class="detail">Verifies debits == credits, party balances, payment allocation, auto-posting completeness. Never edits.</div></div>
-<div class="card" data-model="haiku" data-domain="ui" onclick="toggle(this)"><div class="card-top"><div class="avatar a-haiku">DS</div><div><div class="name">Disha</div><div class="slug">skill-drift-auditor</div></div></div><div class="role">Skill vs source drift survey</div><div class="detail">Surveys .agents/skills/ for drift from current source. Produces prioritized drift report. Only on explicit request.</div></div>
-</div>
-</div>
-</div>
+<footer>
+  Add your domain specialists &rarr; see <code>docs/recruit-your-agents.md</code>
+</footer>
+
 <script>
-function toggle(el){el.classList.toggle('open')}
-function filterCards(f){
-document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('active')});
-event.target.classList.add('active');
-document.querySelectorAll('.card').forEach(function(c){
-if(f==='all'){c.style.display='';return}
-var m=c.dataset.model,d=c.dataset.domain;
-var show=(f==='opus'||f==='sonnet'||f==='haiku')?m===f:d.indexOf(f)!==-1;
-c.style.display=show?'':'none';
-});
+function toggleCard(card) {
+  card.classList.toggle('expanded');
 }
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(card => {
+      if (filter === 'all' || card.dataset.tier === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    document.querySelectorAll('.tier').forEach(tier => {
+      const visibleCards = tier.querySelectorAll('.card:not(.hidden)');
+      tier.style.display = visibleCards.length === 0 ? 'none' : '';
+    });
+  });
+});
 </script>
+
 </body>
 </html>
