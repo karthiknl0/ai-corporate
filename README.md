@@ -305,4 +305,4 @@ MIT
 
 ## Credits
 
-Built by [Karthik Nataraj](https://github.com/karthiknl0) for Om Shakthi Silks ERP, extracted as a reusable framework for governing AI coding agent workforces.
+Built by [Karthik Nataraj](https://github.com/karthiknl0) for your project ERP, extracted as a reusable framework for governing AI coding agent workforces.
