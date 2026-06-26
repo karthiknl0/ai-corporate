@@ -105,7 +105,20 @@ const DOMAINS = [
 
 ## Naming convention
 
-Each agent gets a unique first name. Our convention uses Indian names, but pick whatever fits your team culture. The name must be:
+Each agent gets a unique first name. Pick whatever fits your team culture:
+
+| Style | Examples | Vibe |
+|---|---|---|
+| Indian | Priya, Arjun, Govind, Lakshmi | The original AI Corporate convention |
+| Japanese | Yuki, Kenji, Sakura, Hiro | Clean, tech-forward |
+| Western | Alice, Bob, Clara, David | Familiar, low friction |
+| Nordic | Astrid, Erik, Freya, Lars | Distinctive, memorable |
+| Mixed | Your team's real culture | Most natural |
+| Functional | Builder, Checker, Planner | No persona, pure role (less engaging) |
+
+The starter roster uses Indian names. Rename them if you prefer — the system works on slugs (`senior-hr`, `verifier`), not names. Names are for human readability.
+
+Requirements:
 - Unique across the roster
 - Easy to type in conversation
 - Memorable enough that the orchestrator uses it naturally
