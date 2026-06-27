@@ -167,6 +167,36 @@ The route-guard hook blocks violations in real time:
 
 Violations are logged. Repeated violations can trigger agent definition tightening or retirement.
 
+### Performance Logging
+
+Every subagent task is recorded in `.claude/memory/agent-performance-log.json`:
+
+```json
+{
+  "session": "2026-06-27-2",
+  "agent": "Rohan (reports-specialist, sonnet)",
+  "task": "Centralize font sizes in shared constants",
+  "result": "violation",
+  "notes": "Ignored SendMessage instructions to centralize. Hardcoded values instead."
+}
+```
+
+Four result types: `success`, `failure`, `violation`, `escalated`. The log persists across sessions and informs HR routing — agents with violation histories get tighter prompts or scope restrictions.
+
+### Mid-Task Communication
+
+Background agents can receive updated instructions via `SendMessage`:
+
+```
+SendMessage({
+  to: "<agent-id>",
+  summary: "Switch to centralized approach",
+  message: "Add constants to the shared file first, then import..."
+})
+```
+
+**Known limitation:** agents deep in their original approach may ignore mid-task corrections. This is why critical architectural decisions belong in the initial spawn prompt, not in follow-up messages. When an agent ignores a SendMessage, log it as an instruction violation.
+
 ---
 
 ## 5. Pre-Commit Gate Pipeline
@@ -287,12 +317,13 @@ Updates are committed in the same commit as the code change.
 
 ## Summary
 
-The AI Corporate system works through five interlocking mechanisms:
+The AI Corporate system works through six interlocking mechanisms:
 
 1. **Cost tiers** ensure every task runs on the cheapest capable model
 2. **Parallel execution** keeps the orchestrator free while specialists work
 3. **The orchestrator pattern** separates coordination from implementation
 4. **Agent lifecycle management** keeps the workforce current and correctly sized
 5. **Pre-commit gates** enforce standards that agents cannot bypass
+6. **Performance tracking** creates accountability — every task is logged, violations are recorded, and the data informs future routing decisions
 
 Together, these produce a system where 40-50 agents can work on a production codebase with consistent quality, enforced standards, and optimized cost.

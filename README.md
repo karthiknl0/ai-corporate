@@ -114,6 +114,20 @@ The three-tier system is explicitly designed to minimize token spend:
 
 In practice, this produces roughly 40-50% token savings compared to routing everything through the most capable model.
 
+### Performance Tracking
+
+A JSON-based performance log (`agent-performance-log.json`) records every subagent task — successes, failures, and violations. This enables:
+
+- **Accountability:** Agents that ignore instructions or produce subpar output are logged with evidence.
+- **HR routing:** Historical performance data informs which agent gets future tasks.
+- **Capability audits:** Periodic reviews reveal agents that need retraining, tier changes, or retirement.
+
+See **[Performance Tracking](docs/performance-tracking.md)** for the full system.
+
+### Mid-Task Communication
+
+Background agents can receive updated instructions via `SendMessage` while running. This is essential for correcting an agent's approach mid-task without killing and re-spawning. However, agents under token pressure may ignore mid-task corrections — the performance log catches this pattern.
+
 ### Corporate Org Chart
 
 An interactive HTML visualization (`org-chart.html`) renders the full workforce hierarchy — tiers, roles, domain ownership, and reporting lines. Useful for onboarding and for auditing agent coverage gaps.
@@ -247,11 +261,12 @@ CLAUDE.md                          # Master rules file
 
 This framework was extracted from a production deployment where it managed:
 
-- **47 employees** across 3 model tiers
+- **49 employees** across 3 model tiers
 - **8 pre-commit gates** enforced on every commit
 - **3 governance hooks** (route-guard, db-write-guard, read-skill-reminder)
 - **247 enforced tests** gated by pre-commit
 - **~40-50% token savings** vs. an all-opus approach
+- **Performance log** tracking every agent task with violation accountability
 - **13 deliverables** completed in the first full governance session
 
 ---

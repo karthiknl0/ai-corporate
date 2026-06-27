@@ -63,3 +63,18 @@ Ten patterns that waste tokens, break quality, or create governance gaps. Each o
 **Wrong:** "Ship the feature now, update docs in the next commit."
 **Why it's bad:** The next commit never comes. Or it comes three features later, and the docs are now describing a version of the code that no longer exists. Stale docs are worse than no docs -- they actively mislead.
 **Fix:** Pre-commit gate blocks code without paired docs. Same commit, every time. The gate does not care about your intentions for the next commit.
+
+## 11. Worker ignoring orchestrator instructions
+
+**Wrong:** A background agent receives a SendMessage with updated instructions — "add constants to the shared file first, then import everywhere" — but continues with its original approach of hardcoding values in each file.
+**Why it's bad:** The orchestrator has to redo the work afterward (wasting the tokens the worker already spent plus the orchestrator's rework tokens). The architectural intent (centralization) is lost if the orchestrator doesn't catch it. In our production system, this happened with a print-styling task: the worker was told to centralize font size constants in a shared tokens file, ignored the instruction, hardcoded sizes in 8 files, and the orchestrator had to redo all 9 files.
+**Fix:** Three defenses:
+1. **Pre-brief, don't mid-course correct.** Put the architectural direction in the original spawn prompt, not a SendMessage that arrives after the agent is mid-edit.
+2. **Log the violation.** Add an entry to `agent-performance-log.json` with result `"violation"` so the pattern is tracked across sessions.
+3. **Prefer foreground for architectural tasks.** Background execution is for well-specified mechanical work. If the approach matters more than the speed, run the agent in the foreground so you can verify before it finishes.
+
+## 12. Spawning without verifying output
+
+**Wrong:** Spawning a specialist in the background, receiving the "task complete" notification, and reporting success to the user without checking what actually changed.
+**Why it's bad:** The agent's summary describes what it *intended* to do, not necessarily what it *did*. In the worker-ignoring-instructions case above, the summary said "centralized font sizes" but `git diff` showed no changes to the shared constants file.
+**Fix:** Always verify subagent output before reporting success. Run `git diff --stat` to see what files changed. Grep for expected patterns (did the constant actually get added? are the imports present?). Trust but verify — the agent summary is a claim, not proof.

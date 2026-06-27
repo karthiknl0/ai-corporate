@@ -71,3 +71,11 @@ When multiple agents run in background, `route-guard.mjs` prevents two agents fr
 - Second agent in same domain gets denied with conflict message
 - Same agent re-entry allowed
 - `node .claude/hooks/clear-domain-locks.mjs` to manually clear locks
+
+## Performance tracking
+Log every subagent task to `.claude/memory/agent-performance-log.json`:
+- **result:** `success` | `failure` | `violation` | `escalated`
+- **violation types:** routing (edited outside domain), instruction (ignored SendMessage/prompt directions), quality (output required significant rework), gate (attempted to bypass safety gate)
+- Log after reviewing output, not after receiving the completion notification
+- **Always verify subagent output** before reporting success — `git diff --stat` + grep for expected patterns. The agent summary is a claim, not proof.
+- See `docs/performance-tracking.md` for the full system.
