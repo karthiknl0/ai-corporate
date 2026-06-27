@@ -4,6 +4,8 @@
 
 Run your AI agents like a company. Named employees, specialist routing, HR approval, disciplinary hooks, and cost-tier optimization.
 
+![AI Corporate — Agent Workforce](assets/org-chart-preview.svg)
+
 ---
 
 ## Why?

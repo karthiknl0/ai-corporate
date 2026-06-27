@@ -1,0 +1,106 @@
+<svg viewBox="0 0 900 490" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
+  <style>
+    .title{font-size:20px;font-weight:500;fill:#1a1a1a}
+    .subtitle{font-size:12px;fill:#6b7280}
+    .tier-label{font-size:11px;font-weight:500;fill:#6b7280;letter-spacing:0.5px}
+    .name{font-size:11px;font-weight:500;fill:#fff}
+    .slug{font-size:9px;fill:rgba(255,255,255,0.75)}
+    .opus{fill:#6366f1}
+    .sonnet{fill:#0d9488}
+    .haiku{fill:#ea580c}
+    .footer{font-size:10px;fill:#9ca3af}
+    .stat-num{font-size:22px;font-weight:500;fill:#1a1a1a}
+    .stat-label{font-size:9px;fill:#6b7280}
+    .line{stroke:#e5e7eb;stroke-width:1}
+  </style>
+
+  <text x="450" y="30" text-anchor="middle" class="title">AI Corporate — 20 Universal Agents</text>
+  <text x="450" y="48" text-anchor="middle" class="subtitle">3 tiers: Opus (judgment) · Sonnet (specialists) · Haiku (workers)</text>
+
+  <text x="180" y="80" text-anchor="middle" class="stat-num">20</text>
+  <text x="180" y="94" text-anchor="middle" class="stat-label">Total agents</text>
+  <text x="370" y="80" text-anchor="middle" class="stat-num">4</text>
+  <text x="370" y="94" text-anchor="middle" class="stat-label">Senior (opus)</text>
+  <text x="540" y="80" text-anchor="middle" class="stat-num">10</text>
+  <text x="540" y="94" text-anchor="middle" class="stat-label">Specialists (sonnet)</text>
+  <text x="720" y="80" text-anchor="middle" class="stat-num">6</text>
+  <text x="720" y="94" text-anchor="middle" class="stat-label">Workers (haiku)</text>
+
+  <line x1="40" y1="108" x2="860" y2="108" class="line"/>
+
+  <text x="50" y="132" class="tier-label">SENIOR LEADERSHIP — OPUS</text>
+  <rect x="50" y="142" width="185" height="42" rx="6" class="opus"/>
+  <text x="142" y="160" text-anchor="middle" class="name">Ananya</text>
+  <text x="142" y="174" text-anchor="middle" class="slug">senior-hr</text>
+  <rect x="250" y="142" width="185" height="42" rx="6" class="opus"/>
+  <text x="342" y="160" text-anchor="middle" class="name">Shreya</text>
+  <text x="342" y="174" text-anchor="middle" class="slug">senior-planner</text>
+  <rect x="450" y="142" width="185" height="42" rx="6" class="opus"/>
+  <text x="542" y="160" text-anchor="middle" class="name">Rajan</text>
+  <text x="542" y="174" text-anchor="middle" class="slug">senior-engineer</text>
+  <rect x="650" y="142" width="185" height="42" rx="6" class="opus"/>
+  <text x="742" y="160" text-anchor="middle" class="name">Nakul</text>
+  <text x="742" y="174" text-anchor="middle" class="slug">debugger</text>
+
+  <line x1="40" y1="198" x2="860" y2="198" class="line"/>
+
+  <text x="50" y="222" class="tier-label">DOMAIN SPECIALISTS — SONNET</text>
+  <rect x="50" y="232" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="126" y="250" text-anchor="middle" class="name">Deepak</text>
+  <text x="126" y="264" text-anchor="middle" class="slug">postgres-writer</text>
+  <rect x="212" y="232" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="288" y="250" text-anchor="middle" class="name">Tejas</text>
+  <text x="288" y="264" text-anchor="middle" class="slug">typescript-pro</text>
+  <rect x="374" y="232" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="450" y="250" text-anchor="middle" class="name">Riya</text>
+  <text x="450" y="264" text-anchor="middle" class="slug">react-specialist</text>
+  <rect x="536" y="232" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="612" y="250" text-anchor="middle" class="name">Kritika</text>
+  <text x="612" y="264" text-anchor="middle" class="slug">code-reviewer</text>
+  <rect x="698" y="232" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="774" y="250" text-anchor="middle" class="name">Mitra</text>
+  <text x="774" y="264" text-anchor="middle" class="slug">code-mapper</text>
+
+  <rect x="50" y="284" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="126" y="302" text-anchor="middle" class="name">Vidya</text>
+  <text x="126" y="316" text-anchor="middle" class="slug">skill-updater</text>
+  <rect x="212" y="284" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="288" y="302" text-anchor="middle" class="name">Nisha</text>
+  <text x="288" y="316" text-anchor="middle" class="slug">qa-engineer</text>
+  <rect x="374" y="284" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="450" y="302" text-anchor="middle" class="name">Ravi</text>
+  <text x="450" y="316" text-anchor="middle" class="slug">devops-engineer</text>
+  <rect x="536" y="284" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="612" y="302" text-anchor="middle" class="name">Shiva</text>
+  <text x="612" y="316" text-anchor="middle" class="slug">security-auditor</text>
+  <rect x="698" y="284" width="152" height="42" rx="6" class="sonnet"/>
+  <text x="774" y="302" text-anchor="middle" class="name">Parvati</text>
+  <text x="774" y="316" text-anchor="middle" class="slug">security-boundary</text>
+
+  <line x1="40" y1="340" x2="860" y2="340" class="line"/>
+
+  <text x="50" y="364" class="tier-label">WORKERS — HAIKU</text>
+  <rect x="50" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="113" y="392" text-anchor="middle" class="name">Anand</text>
+  <text x="113" y="406" text-anchor="middle" class="slug">verifier</text>
+  <rect x="186" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="249" y="392" text-anchor="middle" class="name">Saras</text>
+  <text x="249" y="406" text-anchor="middle" class="slug">docs-scribe</text>
+  <rect x="322" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="385" y="392" text-anchor="middle" class="name">Gita</text>
+  <text x="385" y="406" text-anchor="middle" class="slug">grep-reporter</text>
+  <rect x="458" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="521" y="392" text-anchor="middle" class="name">Prasad</text>
+  <text x="521" y="406" text-anchor="middle" class="slug">postgres-pro</text>
+  <rect x="594" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="657" y="392" text-anchor="middle" class="name">Kavya</text>
+  <text x="657" y="406" text-anchor="middle" class="slug">comms-manager</text>
+  <rect x="730" y="374" width="126" height="42" rx="6" class="haiku"/>
+  <text x="793" y="392" text-anchor="middle" class="name">Asha</text>
+  <text x="793" y="406" text-anchor="middle" class="slug">accessibility</text>
+
+  <line x1="40" y1="430" x2="860" y2="430" class="line"/>
+
+  <text x="450" y="455" text-anchor="middle" class="footer">Starter roster — add your domain specialists via docs/recruit-your-agents.md</text>
+  <text x="450" y="472" text-anchor="middle" class="footer">Open .claude/org-chart.html for the interactive version</text>
+</svg>
