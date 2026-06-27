@@ -2,6 +2,25 @@
 
 The starter roster has 20 universal agents that work for any project. Your project's **domain specialists** are unique to you — recruit them based on your codebase.
 
+## The Bootstrap Pattern — HR first
+
+**Ananya** (`senior-hr`, opus) is included in the starter roster as the **bootstrap employee**. She is the first hire in any AI Corporate system — the one agent you add without HR approval, because she *is* HR.
+
+Every subsequent agent recruitment MUST go through Ananya. This prevents:
+- **Agent sprawl** — creating a specialist for every minor sub-problem
+- **Tier waste** — assigning opus to work haiku can handle
+- **Overlap** — two agents competing for the same domain
+- **Ghost agents** — agents with no routing trigger that never get spawned
+
+The bootstrap sequence:
+1. User adds Ananya (senior-hr) — this is the only self-approved hire
+2. User proposes the next agent to Ananya
+3. Ananya evaluates: gap, workload, tier, boundaries, ROI
+4. Approved → create agent file + add to CLAUDE.md routing table
+5. Repeat for each new hire
+
+**Do not skip HR.** If the orchestrator recruits agents without Ananya's approval, it will optimize for convenience (more agents, higher tiers) rather than governance (fewer agents, cheapest viable tier).
+
 ## When to recruit
 
 Recruit a new agent when:

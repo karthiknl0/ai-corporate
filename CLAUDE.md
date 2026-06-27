@@ -26,12 +26,16 @@ The complete employee directory is in `.claude/agents/`.
 7. Test suite must pass (`vitest run`)
 8. Test files require agent knowledge update
 
+## Recruitment — HR-first (bootstrap pattern)
+**Ananya** (`senior-hr`, opus) is the **bootstrap employee** — first hire, no HR approval needed for her. Every subsequent agent recruitment MUST go through Ananya for evaluation (gap, workload, tier, boundaries, ROI). No agent joins without HR approval. See `docs/recruit-your-agents.md`.
+
 ## Mandatory specialist subagents (spawn — never inline)
 
 *Customize this table for your project's domains.*
 
 | Trigger | Employee — `slug` (model) |
 |---|---|
+| New agent recruitment, capability audits, tier assignment | **Ananya** `senior-hr` (opus) |
 | DB read-only: query opt / EXPLAIN / schema review | **Prasad** `postgres-pro` (haiku) |
 | Approved DB write / DDL / migration apply | **Deepak** `postgres-writer` (sonnet) |
 | Complex TypeScript errors / generics | **Tejas** `typescript-pro` (sonnet) |
