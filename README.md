@@ -128,6 +128,34 @@ See **[Performance Tracking](docs/performance-tracking.md)** for the full system
 
 Background agents can receive updated instructions via `SendMessage` while running. This is essential for correcting an agent's approach mid-task without killing and re-spawning. However, agents under token pressure may ignore mid-task corrections — the performance log catches this pattern.
 
+### Delegation Brief Discipline
+
+The orchestrator follows a strict protocol for writing delegation prompts. Brief anatomy: one-sentence task + acceptance condition, file paths and line ranges (never file contents), hard constraints only, fixed report schema. Agents receive the minimum context they need to do the work — not a knowledge dump of everything the orchestrator knows.
+
+A standard report schema is embedded in every implementation brief, forcing agents to produce checkable `file:line` evidence instead of prose:
+
+```
+VERDICT: <fixed | blocked | needs-decision>
+ROOT CAUSE: file:line + ≤2 sentences
+CHANGES: bullet list, file per line
+EVIDENCE: ≤10 lines of output diff
+```
+
+See **[Writing Delegation Briefs](docs/writing-delegation-briefs.md)** for the full brief anatomy, tier selection table, escalation handoff template, and trust signals for verifying subagent output.
+
+### Agent Learning Methodology
+
+Agents accumulate beliefs about the codebase across long sessions. Without discipline, these beliefs grow stale, get written into memory indiscriminately, or get silently swallowed mid-task when a discovery contradicts the brief.
+
+AI Corporate defines a protocol for how agents should update their beliefs:
+
+- **Surprise filter:** update only when the new information contradicts a prediction you would have made
+- **Effect-level verification:** verify at the outcome, not at the claim — never trust a tool's self-report about its own gate
+- **Retention threshold:** only write down what a competent engineer cannot rediscover in under a minute
+- **Worker 3-tier protocol:** Tier 1 (act + state update in report) · Tier 2 (put `LEARNED:` in report, let orchestrator retain) · Tier 3 (stop and escalate — never reconcile contradictions silently)
+
+See **[Learning Methodology](docs/learning-methodology.md)** for the full protocol.
+
 ### Corporate Org Chart
 
 An interactive HTML visualization (`org-chart.html`) renders the full workforce hierarchy — tiers, roles, domain ownership, and reporting lines. Useful for onboarding and for auditing agent coverage gaps.

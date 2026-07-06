@@ -73,6 +73,18 @@ Ten patterns that waste tokens, break quality, or create governance gaps. Each o
 2. **Log the violation.** Add an entry to `agent-performance-log.json` with result `"violation"` so the pattern is tracked across sessions.
 3. **Prefer foreground for architectural tasks.** Background execution is for well-specified mechanical work. If the approach matters more than the speed, run the agent in the foreground so you can verify before it finishes.
 
+## 13. Pre-digesting then also delegating
+
+**Wrong:** The orchestrator reads five files to fully understand a database schema issue, then spawns a database specialist and re-explains everything it just read.
+**Why it's bad:** You paid twice — once for the orchestrator's context loading, once for the specialist's. The specialist would have found the same files in under 30 seconds. You also inflated the brief with redundant context, which makes the specialist's job harder, not easier.
+**Fix:** Pick one: either do it inline (you already understood it) or delegate without pre-reading. The exception is one targeted read of a known file to extract a line range or confirm the file exists — that is precision, not pre-digestion.
+
+## 14. Bloated delegation briefs
+
+**Wrong:** A brief that pastes file contents, prior tool outputs, skill excerpts, and a numbered 12-step procedure into the prompt before the actual task.
+**Why it's bad:** The specialist receives more context than fits efficiently in its window, the stable cacheable content is buried under volatile data, and the step-by-step procedure becomes the new law — the specialist follows steps even when step 4 turns out to be wrong, because reversing course feels like violating instructions. In practice we've seen specialists follow a checklist off a cliff because step 7 said "run the migration" and step 7 said so.
+**Fix:** Brief anatomy: one-sentence task + acceptance condition, file paths + line ranges (never file contents), hard constraints only, fixed report schema. Total: one short paragraph. If the brief is longer than half a page, you are writing a runbook, not a brief. Put the constraints in the agent definition where they live permanently — not in every brief.
+
 ## 12. Spawning without verifying output
 
 **Wrong:** Spawning a specialist in the background, receiving the "task complete" notification, and reporting success to the user without checking what actually changed.
