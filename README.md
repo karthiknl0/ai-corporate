@@ -116,6 +116,8 @@ The three-tier system is explicitly designed to minimize token spend:
 
 In practice, this produces roughly 40-50% token savings compared to routing everything through the most capable model.
 
+> **Stack with RTK for maximum savings.** [RTK (Rust Token Killer)](https://github.com/reachingforthejack/rtk) is a CLI proxy that sits at the Claude Code hook level and compresses tool outputs before they reach the model — independently of what agents write. Combine it with AI Corporate's agent output discipline (R1–R19, see `docs/agent-efficiency.md`) and you get savings from two separate layers: AI Corporate cuts agent *output* tokens by 50–65%; RTK cuts *tool output input* tokens by 60–90%. Together they typically reduce total session cost by 70–85% compared to an undisciplined all-Opus setup.
+
 ### Performance Tracking
 
 A JSON-based performance log (`agent-performance-log.json`) records every subagent task — successes, failures, and violations. This enables:
@@ -161,6 +163,22 @@ See **[Learning Methodology](docs/learning-methodology.md)** for the full protoc
 ### Corporate Org Chart
 
 An interactive HTML visualization (`org-chart.html`) renders the full workforce hierarchy — tiers, roles, domain ownership, and reporting lines. Useful for onboarding and for auditing agent coverage gaps.
+
+---
+
+## Further Cost Reduction — Stack with RTK
+
+AI Corporate controls *agent output* tokens (what agents write back). [RTK](https://github.com/reachingforthejack/rtk) controls *tool output input* tokens (what CLI tools pipe into the model) — a completely separate cost layer that AI Corporate cannot touch.
+
+Install RTK alongside this framework for an additional **60–90% reduction** on tool output tokens:
+
+```bash
+cargo install rtk
+# Then run Claude Code — RTK rewrites git/grep/bash output transparently via hook
+rtk gain   # see your savings
+```
+
+See `docs/agent-efficiency.md` for the full R1–R19 output discipline rules (the AI Corporate layer) and how both tools complement each other.
 
 ---
 
