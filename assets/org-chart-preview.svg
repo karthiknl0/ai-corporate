@@ -1,106 +1,145 @@
-<svg viewBox="0 0 900 490" xmlns="http://www.w3.org/2000/svg" font-family="system-ui,-apple-system,sans-serif">
-  <style>
-    .title{font-size:20px;font-weight:500;fill:#1a1a1a}
-    .subtitle{font-size:12px;fill:#6b7280}
-    .tier-label{font-size:11px;font-weight:500;fill:#6b7280;letter-spacing:0.5px}
-    .name{font-size:11px;font-weight:500;fill:#fff}
-    .slug{font-size:9px;fill:rgba(255,255,255,0.75)}
-    .opus{fill:#6366f1}
-    .sonnet{fill:#0d9488}
-    .haiku{fill:#ea580c}
-    .footer{font-size:10px;fill:#9ca3af}
-    .stat-num{font-size:22px;font-weight:500;fill:#1a1a1a}
-    .stat-label{font-size:9px;fill:#6b7280}
-    .line{stroke:#e5e7eb;stroke-width:1}
-  </style>
+<svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" role="img" font-family="system-ui,-apple-system,sans-serif">
+  <title>AI Corporate — 20 Universal Agents</title>
+  <desc>Org chart showing 20 starter agents across 3 tiers: 4 Opus seniors, 10 Sonnet specialists, 6 Haiku workers.</desc>
 
-  <text x="450" y="30" text-anchor="middle" class="title">AI Corporate — 20 Universal Agents</text>
-  <text x="450" y="48" text-anchor="middle" class="subtitle">3 tiers: Opus (judgment) · Sonnet (specialists) · Haiku (workers)</text>
+  <!-- Background -->
+  <rect width="960" height="560" fill="#ffffff"/>
 
-  <text x="180" y="80" text-anchor="middle" class="stat-num">20</text>
-  <text x="180" y="94" text-anchor="middle" class="stat-label">Total agents</text>
-  <text x="370" y="80" text-anchor="middle" class="stat-num">4</text>
-  <text x="370" y="94" text-anchor="middle" class="stat-label">Senior (opus)</text>
-  <text x="540" y="80" text-anchor="middle" class="stat-num">10</text>
-  <text x="540" y="94" text-anchor="middle" class="stat-label">Specialists (sonnet)</text>
-  <text x="720" y="80" text-anchor="middle" class="stat-num">6</text>
-  <text x="720" y="94" text-anchor="middle" class="stat-label">Workers (haiku)</text>
+  <!-- Title block -->
+  <text x="480" y="32" text-anchor="middle" font-size="18" font-weight="700" fill="#111827" letter-spacing="-0.4">AI Corporate — 20 Universal Agents</text>
+  <text x="480" y="50" text-anchor="middle" font-size="11" fill="#6b7280">3 tiers: Opus (judgment) · Sonnet (specialists) · Haiku (workers)  ·  starter roster — add your domain experts</text>
 
-  <line x1="40" y1="108" x2="860" y2="108" class="line"/>
+  <!-- Stats row -->
+  <rect x="40" y="62" width="880" height="36" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="170" y="80" text-anchor="middle" font-size="18" font-weight="700" fill="#111827">20</text>
+  <text x="170" y="92" text-anchor="middle" font-size="8.5" fill="#6b7280" letter-spacing="0.3">TOTAL AGENTS</text>
+  <line x1="270" y1="68" x2="270" y2="92" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="315" cy="80" r="5" fill="#6366f1"/>
+  <text x="335" y="76" font-size="15" font-weight="700" fill="#6366f1">4</text>
+  <text x="335" y="90" font-size="8.5" fill="#6b7280">Senior · Opus</text>
+  <line x1="430" y1="68" x2="430" y2="92" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="475" cy="80" r="5" fill="#0d9488"/>
+  <text x="495" y="76" font-size="15" font-weight="700" fill="#0d9488">10</text>
+  <text x="495" y="90" font-size="8.5" fill="#6b7280">Specialist · Sonnet</text>
+  <line x1="600" y1="68" x2="600" y2="92" stroke="#e2e8f0" stroke-width="1"/>
+  <circle cx="645" cy="80" r="5" fill="#ea580c"/>
+  <text x="665" y="76" font-size="15" font-weight="700" fill="#ea580c">6</text>
+  <text x="665" y="90" font-size="8.5" fill="#6b7280">Worker · Haiku</text>
 
-  <text x="50" y="132" class="tier-label">SENIOR LEADERSHIP — OPUS</text>
-  <rect x="50" y="142" width="185" height="42" rx="6" class="opus"/>
-  <text x="142" y="160" text-anchor="middle" class="name">Ananya</text>
-  <text x="142" y="174" text-anchor="middle" class="slug">senior-hr</text>
-  <rect x="250" y="142" width="185" height="42" rx="6" class="opus"/>
-  <text x="342" y="160" text-anchor="middle" class="name">Shreya</text>
-  <text x="342" y="174" text-anchor="middle" class="slug">senior-planner</text>
-  <rect x="450" y="142" width="185" height="42" rx="6" class="opus"/>
-  <text x="542" y="160" text-anchor="middle" class="name">Rajan</text>
-  <text x="542" y="174" text-anchor="middle" class="slug">senior-engineer</text>
-  <rect x="650" y="142" width="185" height="42" rx="6" class="opus"/>
-  <text x="742" y="160" text-anchor="middle" class="name">Nakul</text>
-  <text x="742" y="174" text-anchor="middle" class="slug">debugger</text>
+  <!-- OPUS TIER -->
+  <line x1="40" y1="110" x2="920" y2="110" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="50" y="128" font-size="10" font-weight="700" fill="#4338ca" letter-spacing="0.8">SENIOR LEADERSHIP — OPUS  ·  judgment · architecture · approval authority  ·  spawn for irreversible decisions</text>
 
-  <line x1="40" y1="198" x2="860" y2="198" class="line"/>
+  <rect x="50" y="136" width="195" height="50" rx="7" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="147" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Ananya</text>
+  <text x="147" y="170" text-anchor="middle" font-size="9" fill="#6366f1">senior-hr</text>
+  <text x="147" y="181" text-anchor="middle" font-size="8" fill="#818cf8">route tasks · approve recruitment</text>
 
-  <text x="50" y="222" class="tier-label">DOMAIN SPECIALISTS — SONNET</text>
-  <rect x="50" y="232" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="126" y="250" text-anchor="middle" class="name">Deepak</text>
-  <text x="126" y="264" text-anchor="middle" class="slug">postgres-writer</text>
-  <rect x="212" y="232" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="288" y="250" text-anchor="middle" class="name">Tejas</text>
-  <text x="288" y="264" text-anchor="middle" class="slug">typescript-pro</text>
-  <rect x="374" y="232" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="450" y="250" text-anchor="middle" class="name">Riya</text>
-  <text x="450" y="264" text-anchor="middle" class="slug">react-specialist</text>
-  <rect x="536" y="232" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="612" y="250" text-anchor="middle" class="name">Kritika</text>
-  <text x="612" y="264" text-anchor="middle" class="slug">code-reviewer</text>
-  <rect x="698" y="232" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="774" y="250" text-anchor="middle" class="name">Mitra</text>
-  <text x="774" y="264" text-anchor="middle" class="slug">code-mapper</text>
+  <rect x="261" y="136" width="195" height="50" rx="7" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="358" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Shreya</text>
+  <text x="358" y="170" text-anchor="middle" font-size="9" fill="#6366f1">senior-planner</text>
+  <text x="358" y="181" text-anchor="middle" font-size="8" fill="#818cf8">multi-phase decomposition</text>
 
-  <rect x="50" y="284" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="126" y="302" text-anchor="middle" class="name">Vidya</text>
-  <text x="126" y="316" text-anchor="middle" class="slug">skill-updater</text>
-  <rect x="212" y="284" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="288" y="302" text-anchor="middle" class="name">Nisha</text>
-  <text x="288" y="316" text-anchor="middle" class="slug">qa-engineer</text>
-  <rect x="374" y="284" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="450" y="302" text-anchor="middle" class="name">Ravi</text>
-  <text x="450" y="316" text-anchor="middle" class="slug">devops-engineer</text>
-  <rect x="536" y="284" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="612" y="302" text-anchor="middle" class="name">Shiva</text>
-  <text x="612" y="316" text-anchor="middle" class="slug">security-auditor</text>
-  <rect x="698" y="284" width="152" height="42" rx="6" class="sonnet"/>
-  <text x="774" y="302" text-anchor="middle" class="name">Parvati</text>
-  <text x="774" y="316" text-anchor="middle" class="slug">security-boundary</text>
+  <rect x="472" y="136" width="195" height="50" rx="7" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="569" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Rajan</text>
+  <text x="569" y="170" text-anchor="middle" font-size="9" fill="#6366f1">senior-engineer</text>
+  <text x="569" y="181" text-anchor="middle" font-size="8" fill="#818cf8">cross-cutting · architecture</text>
 
-  <line x1="40" y1="340" x2="860" y2="340" class="line"/>
+  <rect x="683" y="136" width="195" height="50" rx="7" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1.5"/>
+  <text x="780" y="156" text-anchor="middle" font-size="12" font-weight="700" fill="#4338ca">Nakul</text>
+  <text x="780" y="170" text-anchor="middle" font-size="9" fill="#6366f1">debugger</text>
+  <text x="780" y="181" text-anchor="middle" font-size="8" fill="#818cf8">hard bugs · root-cause analysis</text>
 
-  <text x="50" y="364" class="tier-label">WORKERS — HAIKU</text>
-  <rect x="50" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="113" y="392" text-anchor="middle" class="name">Anand</text>
-  <text x="113" y="406" text-anchor="middle" class="slug">verifier</text>
-  <rect x="186" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="249" y="392" text-anchor="middle" class="name">Saras</text>
-  <text x="249" y="406" text-anchor="middle" class="slug">docs-scribe</text>
-  <rect x="322" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="385" y="392" text-anchor="middle" class="name">Gita</text>
-  <text x="385" y="406" text-anchor="middle" class="slug">grep-reporter</text>
-  <rect x="458" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="521" y="392" text-anchor="middle" class="name">Prasad</text>
-  <text x="521" y="406" text-anchor="middle" class="slug">postgres-pro</text>
-  <rect x="594" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="657" y="392" text-anchor="middle" class="name">Kavya</text>
-  <text x="657" y="406" text-anchor="middle" class="slug">comms-manager</text>
-  <rect x="730" y="374" width="126" height="42" rx="6" class="haiku"/>
-  <text x="793" y="392" text-anchor="middle" class="name">Asha</text>
-  <text x="793" y="406" text-anchor="middle" class="slug">accessibility</text>
+  <!-- SONNET TIER -->
+  <line x1="40" y1="200" x2="920" y2="200" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="50" y="218" font-size="10" font-weight="700" fill="#0f766e" letter-spacing="0.8">DOMAIN SPECIALISTS — SONNET  ·  bounded domain expertise · complex implementation  ·  add your own here</text>
 
-  <line x1="40" y1="430" x2="860" y2="430" class="line"/>
+  <rect x="50" y="226" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="129" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Deepak</text>
+  <text x="129" y="260" text-anchor="middle" font-size="9" fill="#0d9488">postgres-writer</text>
+  <text x="129" y="271" text-anchor="middle" font-size="8" fill="#134e4a">approved DB writes · DDL</text>
 
-  <text x="450" y="455" text-anchor="middle" class="footer">Starter roster — add your domain specialists via docs/recruit-your-agents.md</text>
-  <text x="450" y="472" text-anchor="middle" class="footer">Open .claude/org-chart.html for the interactive version</text>
+  <rect x="222" y="226" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="301" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Tejas</text>
+  <text x="301" y="260" text-anchor="middle" font-size="9" fill="#0d9488">typescript-pro</text>
+  <text x="301" y="271" text-anchor="middle" font-size="8" fill="#134e4a">complex TS errors · generics</text>
+
+  <rect x="394" y="226" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="473" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Riya</text>
+  <text x="473" y="260" text-anchor="middle" font-size="9" fill="#0d9488">react-specialist</text>
+  <text x="473" y="271" text-anchor="middle" font-size="8" fill="#134e4a">re-renders · TanStack · perf</text>
+
+  <rect x="566" y="226" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="645" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Kritika</text>
+  <text x="645" y="260" text-anchor="middle" font-size="9" fill="#0d9488">code-reviewer</text>
+  <text x="645" y="271" text-anchor="middle" font-size="8" fill="#134e4a">structured PR review</text>
+
+  <rect x="738" y="226" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="817" y="246" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Mitra</text>
+  <text x="817" y="260" text-anchor="middle" font-size="9" fill="#0d9488">code-mapper</text>
+  <text x="817" y="271" text-anchor="middle" font-size="8" fill="#134e4a">large file structure maps</text>
+
+  <rect x="50" y="286" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="129" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Vidya</text>
+  <text x="129" y="320" text-anchor="middle" font-size="9" fill="#0d9488">skill-updater</text>
+  <text x="129" y="331" text-anchor="middle" font-size="8" fill="#134e4a">keep agent knowledge current</text>
+
+  <rect x="222" y="286" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="301" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Nisha</text>
+  <text x="301" y="320" text-anchor="middle" font-size="9" fill="#0d9488">qa-engineer</text>
+  <text x="301" y="331" text-anchor="middle" font-size="8" fill="#134e4a">test cases · coverage</text>
+
+  <rect x="394" y="286" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="473" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Ravi</text>
+  <text x="473" y="320" text-anchor="middle" font-size="9" fill="#0d9488">devops-engineer</text>
+  <text x="473" y="331" text-anchor="middle" font-size="8" fill="#134e4a">docker · deploy · infra</text>
+
+  <rect x="566" y="286" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="645" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Shiva</text>
+  <text x="645" y="320" text-anchor="middle" font-size="9" fill="#0d9488">security-auditor</text>
+  <text x="645" y="331" text-anchor="middle" font-size="8" fill="#134e4a">audit · threat model</text>
+
+  <rect x="738" y="286" width="158" height="50" rx="7" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.5"/>
+  <text x="817" y="306" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">Parvati</text>
+  <text x="817" y="320" text-anchor="middle" font-size="9" fill="#0d9488">security-boundary</text>
+  <text x="817" y="331" text-anchor="middle" font-size="8" fill="#134e4a">RLS · trust boundaries</text>
+
+  <!-- HAIKU TIER -->
+  <line x1="40" y1="350" x2="920" y2="350" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="50" y="368" font-size="10" font-weight="700" fill="#c2410c" letter-spacing="0.8">WORKERS — HAIKU  ·  mechanical tasks · 1/60th cost of Opus  ·  verify · grep · docs · migrate</text>
+
+  <rect x="50" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="115" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Anand</text>
+  <text x="115" y="410" text-anchor="middle" font-size="9" fill="#ea580c">verifier</text>
+  <text x="115" y="421" text-anchor="middle" font-size="8" fill="#9a3412">build · test · lint</text>
+
+  <rect x="196" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="261" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Saras</text>
+  <text x="261" y="410" text-anchor="middle" font-size="9" fill="#ea580c">docs-scribe</text>
+  <text x="261" y="421" text-anchor="middle" font-size="8" fill="#9a3412">doc updates from spec</text>
+
+  <rect x="342" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="407" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Gita</text>
+  <text x="407" y="410" text-anchor="middle" font-size="9" fill="#ea580c">grep-reporter</text>
+  <text x="407" y="421" text-anchor="middle" font-size="8" fill="#9a3412">batch search · compile</text>
+
+  <rect x="488" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="553" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Prasad</text>
+  <text x="553" y="410" text-anchor="middle" font-size="9" fill="#ea580c">postgres-pro</text>
+  <text x="553" y="421" text-anchor="middle" font-size="8" fill="#9a3412">read-only DB · EXPLAIN</text>
+
+  <rect x="634" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="699" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Kavya</text>
+  <text x="699" y="410" text-anchor="middle" font-size="9" fill="#ea580c">comms-manager</text>
+  <text x="699" y="421" text-anchor="middle" font-size="8" fill="#9a3412">status updates</text>
+
+  <rect x="780" y="376" width="130" height="50" rx="7" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="845" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#c2410c">Asha</text>
+  <text x="845" y="410" text-anchor="middle" font-size="9" fill="#ea580c">accessibility</text>
+  <text x="845" y="421" text-anchor="middle" font-size="8" fill="#9a3412">WCAG · a11y audit</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="440" x2="920" y2="440" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="480" y="460" text-anchor="middle" font-size="9" fill="#9ca3af">Starter roster — recruit domain specialists via docs/recruit-your-agents.md · HR approval required for each new hire</text>
+  <text x="480" y="476" text-anchor="middle" font-size="9" fill="#9ca3af">Delegation briefs: docs/writing-delegation-briefs.md · Learning methodology: docs/learning-methodology.md</text>
 </svg>

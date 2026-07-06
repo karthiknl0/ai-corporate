@@ -6,6 +6,8 @@ Run your AI agents like a company. Named employees, specialist routing, HR appro
 
 ![AI Corporate — Agent Workforce](assets/org-chart-preview.svg)
 
+![AI Corporate — Request Flow](assets/workflow-preview.svg)
+
 ---
 
 ## Why?
