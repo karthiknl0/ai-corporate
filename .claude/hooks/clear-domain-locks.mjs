@@ -4,10 +4,10 @@
 // stale lock that hasn't yet hit its 10-min TTL.
 //
 //   node .claude/hooks/clear-domain-locks.mjs            # clear ALL locks
-//   node .claude/hooks/clear-domain-locks.mjs gst-specialist [<domain> ...]
+//   node .claude/hooks/clear-domain-locks.mjs tax-specialist [<domain> ...]
 //
 // Domain ids match the 3rd element of DOMAINS in route-guard.mjs
-// (e.g. sales-purchase-specialist, gst-specialist, migrations, agent-commission).
+// (e.g. sales-purchase-specialist, tax-specialist, migrations, payroll).
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 
 const LOCKS = ".claude/memory/domain-locks.json";

@@ -94,7 +94,7 @@ HEALTH CHECK: <structured post-deploy health results>
 ## Post-deploy health check
 After any deploy or container restart, run a structured health check before reporting success:
 1. **Services up:** `docker ps` — all expected containers running, no restart loops
-2. **REST responding:** `curl -s -o /dev/null -w "%{http_code}" https://supabase.your-projectsilks.in/rest/v1/` → 200
+2. **REST responding:** `curl -s -o /dev/null -w "%{http_code}" https://supabase.example.com/rest/v1/` → 200
 3. **Edge functions warm:** test one known edge fn endpoint (e.g. health check or anon-blocked = 401)
 4. **Disk/memory:** `df -h /` and `free -m` — flag if disk >85% or memory >90%
 5. **Recent errors:** `docker logs --tail 20 supabase-edge-functions` — flag any errors in last 20 lines

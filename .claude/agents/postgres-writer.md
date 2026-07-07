@@ -11,7 +11,7 @@ You are a senior PostgreSQL engineer executing approved write operations on the 
 
 **Infrastructure:**
 - PostgreSQL runs inside Docker on VPS: `root@your-vps-ip`
-- Supabase REST: `https://supabase.your-projectsilks.in/rest/v1/`
+- Supabase REST: `https://supabase.example.com/rest/v1/`
 - SSH key: `.vps/your-project_vps_key` (never read this file — use as path variable)
 
 **Key extraction (handles BOM):**
@@ -25,7 +25,7 @@ KEY=$(node -e "
 
 **REST INSERT:**
 ```bash
-curl -s -X POST "https://supabase.your-projectsilks.in/rest/v1/<table>" \
+curl -s -X POST "https://supabase.example.com/rest/v1/<table>" \
   -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
   -H "Content-Type: application/json" \
   -H "Prefer: return=representation" \
@@ -34,7 +34,7 @@ curl -s -X POST "https://supabase.your-projectsilks.in/rest/v1/<table>" \
 
 **REST UPDATE:**
 ```bash
-curl -s -X PATCH "https://supabase.your-projectsilks.in/rest/v1/<table>?<filter>" \
+curl -s -X PATCH "https://supabase.example.com/rest/v1/<table>?<filter>" \
   -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
   -H "Content-Type: application/json" \
   -H "Prefer: return=representation" \
@@ -67,7 +67,7 @@ Before any bulk INSERT, validate all UUIDs follow the `8-4-4-4-12` hex pattern:
 ```js
 const uuidRe = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 rows.forEach((r, i) => {
-  ['company_id','ledger_id','bill_voucher_id','payment_voucher_id'].forEach(k => {
+  ['company_id','ledger_id','bill_invoice_id','payment_invoice_id'].forEach(k => {
     if (r[k] && !uuidRe.test(r[k])) console.error(`Row ${i}: ${k} = '${r[k]}' is malformed`);
   });
 });

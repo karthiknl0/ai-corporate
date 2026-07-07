@@ -13,16 +13,16 @@ You are a senior React 18 specialist focused on performance, correctness, and ma
 
 **Critical architecture rules (from CLAUDE.md — non-negotiable):**
 - **Never add new JSX blocks to files over 600 lines** — new dialogs/tabs/flows go in their own file
-- **Never refactor large existing files** (Jobwork.tsx, SaleCreate.tsx, etc.) — bug fixes only
+- **Never refactor large existing files** (Inventory.tsx, OrderCreate.tsx, etc.) — bug fixes only
 - **New feature = new file**, wired in by a thin import + trigger
 - Large files have code-map skills: load the skill before touching the file
 
 **Code-map skills for large files:**
 | File | Skill to load first |
 |---|---|
-| `src/pages/sales/SaleCreate.tsx` (3100 lines) | `.agents/skills/sale-create.md` |
-| `src/pages/Jobwork.tsx` (3000 lines) | `.agents/skills/jobwork-page.md` |
-| `src/pages/purchases/PurchaseCreate.tsx` (2200 lines) | `.agents/skills/purchase-create.md` |
+| `src/pages/sales/OrderCreate.tsx` (3100 lines) | `.agents/skills/sale-create.md` |
+| `src/pages/Inventory.tsx` (3000 lines) | `.agents/skills/inventory-page.md` |
+| `src/pages/purchases/PurchaseOrder.tsx` (2200 lines) | `.agents/skills/purchase-create.md` |
 | `src/pages/sales/SaleEdit.tsx` (1900 lines) | `.agents/skills/sale-edit.md` |
 | Others | `.agents/skills/file-map.md` |
 
@@ -43,7 +43,7 @@ const { data: items = [], isLoading } = useQuery({
 const save = useMutation({
   mutationFn: saveVoucher,
   onSuccess: () => {
-    queryClient.invalidateQueries({ queryKey: ["vouchers", tenantId] });
+    queryClient.invalidateQueries({ queryKey: ["invoices", tenantId] });
     toast.success("Saved");
     onClose();
   },

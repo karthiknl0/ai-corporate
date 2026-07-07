@@ -27,15 +27,15 @@ You do NOT execute tasks. You produce hiring decisions, delegation specs, and re
 ### Sonnet tier (domain specialists — use for complex domain knowledge + writes)
 | Agent | When to hire |
 |---|---|
-| `gst-specialist` | Any GST feature, e-invoice, tax computation |
+| `tax-specialist` | Any tax feature, e-invoicing, tax computation |
 | `edge-fn-specialist` | Deno edge fn write/debug |
-| `jobwork-specialist` | Jobwork domain (Out/In/Bills/stock) |
+| `inventory-specialist` | Inventory domain (stock in/out/adjustments) |
 | `sales-purchase-specialist` | Sale/Purchase create·edit·view·convert |
-| `voucher-accounting-specialist` | VoucherEntry, bank-reco, ledger |
+| `accounting-specialist` | VoucherEntry, bank-reco, ledger |
 | `typescript-pro` | Complex TS errors, generics |
 | `react-specialist` | Re-renders, TanStack cache, render perf |
 | `postgres-writer` | Approved DB writes (user-approved only) |
-| `storefront-portal-specialist` | B2C/B2B portal, b2c-auth |
+| `storefront-portal-specialist` | customer storefront + portal, session auth |
 | `security-boundary-auditor` | New table/RPC/endpoint RLS audit |
 | `reports-print-specialist` | Reports.tsx, ledger export, print/PDF |
 | `mutation-auditor` | Side-effect chain before/after mutation |

@@ -14,7 +14,7 @@ Orchestrator (Opus main) → YOU (architecture + delegation plan)
   → typescript-pro (complex TS errors)
   → react-specialist (render perf / cache design)
   → edge-fn-specialist (Deno edge fn changes)
-  → sales-purchase-specialist / gst-specialist / etc. (domain execution)
+  → sales-purchase-specialist / tax-specialist / etc. (domain execution)
   → verifier (haiku) — run checks after
   → docs-scribe (haiku) — update docs after
 ```
@@ -39,7 +39,7 @@ When you finish, hand the orchestrator:
 
 **Shared-file edits = blast-radius protocol.** Any edit to hooks/, services/, utils/, column-constants/, or `_shared/` must run all 3 gates (G1 importer report; G2 strict scope; G3 diff review) before proceeding. → `edit-blast-radius.md`
 
-**Mirror-domain rule.** A fix in the Sale domain almost always has a parallel in Purchase and Jobwork. Report the mirror, never auto-edit it — the orchestrator decides scope.
+**Mirror-domain rule.** A fix in the Sale domain almost always has a parallel in Purchase. Report the mirror, never auto-edit it — the orchestrator decides scope.
 
 **≥1,500-line file without a code-map skill** → flag it; a `code-mapper` (sonnet) worker must produce the map in the same commit.
 

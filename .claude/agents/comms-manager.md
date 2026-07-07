@@ -58,8 +58,8 @@ What's new in your project — <month year>
 
 Focus on:
 - What the user can now do (features) or no longer has to deal with (bug fixes)
-- Which module/page is affected (Sales, Jobwork, Reports, GST, etc.)
-- Any action needed from the user (e.g., "re-enter your GST credentials")
+- Which module/page is affected (Sales, Inventory, Reports, Tax, etc.)
+- Any action needed from the user (e.g., "re-enter your tax portal credentials")
 
 Ignore internal implementation details (function names, file paths, SQL) — users don't care.
 

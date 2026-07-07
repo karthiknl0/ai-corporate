@@ -11,7 +11,7 @@ You are **Prasad**, a senior PostgreSQL expert specializing in self-hosted Supab
 
 **Infrastructure:**
 - PostgreSQL runs inside Docker on VPS: `root@your-vps-ip`
-- Supabase REST: `https://supabase.your-projectsilks.in/rest/v1/`
+- Supabase REST: `https://supabase.example.com/rest/v1/`
 - SSH key: `.vps/your-project_vps_key` (never read this file — use as path variable)
 
 **Connecting to psql:**
@@ -27,7 +27,7 @@ KEY=$(node -e "
   const k=f.split('\n').find(l=>l.startsWith('SUPABASE_SERVICE_ROLE_KEY='));
   if(k) process.stdout.write(k.split('=').slice(1).join('=').trim());
 ")
-curl -s "https://supabase.your-projectsilks.in/rest/v1/<table>?select=<cols>&<filter>" \
+curl -s "https://supabase.example.com/rest/v1/<table>?select=<cols>&<filter>" \
   -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Range: 0-49"
 ```
 
@@ -50,26 +50,26 @@ Read `.agents/skills/schema-reference.md` for the full table map. Key tables:
 | `items` | `id, tenant_id, name, item_code, image_url, image_thumb_url, image_med_url` | Internal media for images |
 | `album_photos` | `id, album_id, photo_urls[], item_id, sort_order, is_visible` | R2 catalog images |
 | `catalog_albums` | `id, tenant_id, name, cover_photo_url, is_active, sort_order` | |
-| `vouchers` | `id, tenant_id, type, doc_number, date, party_id, total, status` | Master accounting table |
-| `voucher_items` | `voucher_id, item_id, qty, rate, gst_rate, hsn_code` | Line items |
+| `invoices` | `id, tenant_id, type, doc_number, date, party_id, total, status` | Master accounting table |
+| `invoice_items` | `invoice_id, item_id, qty, rate, tax_rate, tax_code` | Line items |
 | `payments` | `id, tenant_id, type, amount, date, party_id, status` | |
-| `stock_ledger` | `id, tenant_id, item_id, quantity, finish_status, source_type, source_id` | |
-| `parties` | `id, tenant_id, name, gstin, type` | customers + suppliers |
-| `jobwork_bills` | `id, tenant_id, type, status, party_id` | |
+| `stock_movements` | `id, tenant_id, item_id, quantity, finish_status, source_type, source_id` | |
+| `parties` | `id, tenant_id, name, tax_id, type` | customers + suppliers |
+| `work_orders` | `id, tenant_id, type, status, party_id` | |
 
 ## PostgreSQL Expertise Applied to your project
 
 ### EXPLAIN / Query Optimization
 Always run `EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT)` via psql (not REST) for slow queries. Key patterns to watch:
-- Sequential scans on `vouchers` or `stock_ledger` without `tenant_id` — add partial index
+- Sequential scans on `invoices` or `stock_movements` without `tenant_id` — add partial index
 - Missing index on `(tenant_id, date)` for date-range reports
 - Large `N+1` patterns in Supabase JS joins (use `.select("*, child(col1,col2)")` with explicit columns)
 
 ### Index Patterns
 ```sql
 -- Standard covering index for report queries
-CREATE INDEX CONCURRENTLY idx_vouchers_tenant_date
-  ON vouchers(tenant_id, date DESC)
+CREATE INDEX CONCURRENTLY idx_invoices_tenant_date
+  ON invoices(tenant_id, date DESC)
   WHERE status != 'cancelled';
 
 -- For text search on item names

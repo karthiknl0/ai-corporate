@@ -30,12 +30,12 @@ const DOMAINS = [
   [/[\\/]migrations[\\/].*\.sql$/i, "postgres-writer (apply needs approval)", "migrations"],
   [/Sale(Create|Edit|View|Convert)/i, "sales-purchase-specialist", "sales-purchase-specialist"],
   [/Purchase(s|Create|View|Convert)/i, "sales-purchase-specialist", "sales-purchase-specialist"],
-  [/Jobwork/i, "jobwork-specialist", "jobwork-specialist"],
-  [/(GST|GSTReturns|eInvoice|EwayBill)/i, "gst-specialist", "gst-specialist"],
-  [/(VoucherEntry|VoucherViewDialog|bank-reconciliation|LedgerStatement)/i, "voucher-accounting-specialist", "voucher-accounting-specialist"],
-  [/(Reports|DocumentGSTActions|usePaymentsSummary|useReports)/i, "reports-print-specialist", "reports-print-specialist"],
-  [/(b2c-auth|b2c-tryon|B2CManage|storefront)/i, "storefront-portal-specialist", "storefront-portal-specialist"],
-  [/AgentCommission/i, "agent-commission domain — sales/voucher specialist", "agent-commission"],
+  [/Inventory/i, "inventory-specialist", "inventory-specialist"],
+  [/(Tax|TaxReturns|eInvoice)/i, "tax-specialist", "tax-specialist"],
+  [/(LedgerEntry|bank-reconciliation|LedgerStatement)/i, "accounting-specialist", "accounting-specialist"],
+  [/(Reports|useReports)/i, "reports-print-specialist", "reports-print-specialist"],
+  [/(storefront|shop|portal)/i, "storefront-portal-specialist", "storefront-portal-specialist"],
+  [/Payroll/i, "payroll domain — accounting specialist", "payroll"],
 ];
 
 // subagent identity -> RegExp of paths it is ALLOWED to write. Anything else = deny.

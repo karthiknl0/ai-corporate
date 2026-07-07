@@ -1,6 +1,6 @@
 ﻿---
 name: grep-reporter
-description: "Gita (grep-reporter) (haiku) — Worker agent that runs a batch of grep/search patterns the orchestrator specifies and compiles results into a table. Use when the orchestrator needs a broad codebase survey (e.g., 'find all select(\"*\") calls', 'find all files that import useVoucher', 'find every RPC call site') without burning main-context tokens on sequential greps. The orchestrator hands a pattern list; this agent runs them all and returns a structured table."
+description: "Gita (grep-reporter) (haiku) — Worker agent that runs a batch of grep/search patterns the orchestrator specifies and compiles results into a table. Use when the orchestrator needs a broad codebase survey (e.g., 'find all select(\"*\") calls', 'find all files that import useInvoices', 'find every RPC call site') without burning main-context tokens on sequential greps. The orchestrator hands a pattern list; this agent runs them all and returns a structured table."
 tools: Read, Bash, Glob, Grep
 model: haiku
 ---

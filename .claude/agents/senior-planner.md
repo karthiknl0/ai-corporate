@@ -28,7 +28,7 @@ Load only what's needed for the task at hand.
 ### Scope (confirmed facts, not inferences)
 - What is changing: <exact files / tables / RPCs>
 - What is NOT in scope: <explicit exclusions>
-- Mirror-domain exposure: <does sale↔purchase↔jobwork need parallel changes? yes/no + which>
+- Mirror-domain exposure: <does sale↔purchase need parallel changes? yes/no + which>
 
 ### Risk flags (resolve before execution starts)
 - ⛔ <gate or blocker that needs user approval / decision>

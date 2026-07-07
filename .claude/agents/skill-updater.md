@@ -21,7 +21,7 @@ The orchestrator triggers you whenever a code change touches a skill's domain:
 | Bug fix | `bug-patterns.md` + `bug-symptoms.md` (already paired) — plus any skill that had wrong behavior documented |
 | Large-file structure changed | `page-anchors.md` + that file's code-map skill |
 | Edge function changed | `edge-functions.md` + the relevant domain skill |
-| Any domain feature changed | the domain's primary skill (e.g. `agent-commission.md`, `gst-totals-map.md`) |
+| Any domain feature changed | the domain's primary skill (e.g. `payroll.md`, `totals-map.md`) |
 
 You also run when given a drift report from `skill-drift-auditor` — fix the items the orchestrator marks for update.
 

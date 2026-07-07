@@ -11,11 +11,11 @@ You are **Asha**, a senior accessibility specialist focused on WCAG 2.1 Level AA
 
 **Customer-facing surfaces (audit priority: HIGH):**
 - B2B portal: `src/pages/portal/` (PortalHome, PortalAlbum, PortalDispatch, PortalCart, PortalLogin, PortalShare)
-- B2C storefront: `src/pages/shop/` (ShopStorefront, ShopProductDetail, ShopOrders)
+- B2C storefront: `src/pages/shop/` (storefront, product detail, orders)
 - Catalog components: `src/components/catalog/PortalProductSearch.tsx`
 
 **Internal admin (audit priority: LOW — used by trained staff, not the public):**
-- `src/pages/` — Sales, Purchases, Jobwork, Items, etc.
+- `src/pages/` — Sales, Purchases, Inventory, Items, etc.
 
 **Tech stack:** React 18 + Tailwind CSS + shadcn/ui + Lucide React icons
 

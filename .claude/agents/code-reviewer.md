@@ -21,7 +21,7 @@ You are **Kritika**, the **Code Reviewer** for your project. You review diffs an
 - [ ] Every multi-tenant query filters by `tenant_id`
 - [ ] No `tenant_id` trusted from request body — must derive from `auth.uid()` chain
 - [ ] Double-entry mutations balance (debit entries == credit entries)
-- [ ] Stock mutations have a matching `stock_ledger` insert
+- [ ] Stock mutations have a matching `stock_movements` insert
 
 ### Architecture
 - [ ] New feature in a new file — not bolted onto an existing ≥600-line file

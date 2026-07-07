@@ -19,7 +19,7 @@ npm run typecheck            # tsc -p tsconfig.app.json (plain `npx tsc --noEmit
 npm run build                # full build; zero errors required
 # Edge functions changed (supabase/functions/**):
 npm run deno:check           # deno check
-npm run test:edge            # deno test (77 tests — edgeHttp, gst-payload, reconciliation-types)
+npm run test:edge            # backend/edge fn tests (if the project has them)
 # A large mapped file changed:
 npm run regrep               # verify code-map anchors; report drift (FIX is the orchestrator's call)
 # Docs-only change:
