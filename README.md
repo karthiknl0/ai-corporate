@@ -75,11 +75,21 @@ A `.githooks/pre-commit` script runs 8 checks before any commit lands:
 7. **Edge function check** — Deno files must pass `deno check`
 8. **Test gate** — enforced test coverage for changed modules
 
-### Route-Guard Hook
+### Route-Guard Hook (v4 — hard deny)
 
-A `PreToolUse` hook intercepts file edits in real time. If an agent tries to edit a file that belongs to a specialist domain, the hook blocks the edit and tells the agent which specialist to spawn instead.
+A `PreToolUse` hook intercepts file writes in real time — both `Edit`/`Write` tool calls AND shell writes (`sed -i`, redirects, `tee`, `cp`/`mv`, `Set-Content`, `git apply/checkout/restore`). If the orchestrator tries to write a specialist-domain source file, the hook **denies** the write and names the specialist to spawn.
 
-This is not advisory — it is enforced. The agent literally cannot write to the file without routing through the specialist.
+Deny, not ask: an "ask" dialog gets habitually approved and the orchestrator learns nothing; a deny bounces the correction back to the model, which then spawns the specialist. This matters most on cheaper orchestrator tiers (Sonnet), where rule compliance decays fastest.
+
+Genuine inline exceptions go through a **user-only override file** (`.claude/ROUTE_OVERRIDE`, one path per line, consumed one-shot) — the hook denies any in-session attempt to create or modify it, so only the human can grant the exception.
+
+### Brief-Guard Hook
+
+A second `PreToolUse` hook validates every agent spawn prompt before it dispatches. The prompt must contain: the identity opener (`You are **Name** (role, model)`), the first-output identity instruction, a REPORT schema, a `Done =` stop condition, and — for write-capable agents — the destructive-git prohibition. Missing pieces are denied back to the orchestrator with the exact fix, and it re-spawns correctly — no user interruption.
+
+### Anti-Decay Reinjection
+
+A `UserPromptSubmit` hook re-injects the three load-bearing invariants (~50 tokens) on every user turn: route source edits to specialists, complete spawn briefs, prod changes need approval. Session-start rules decay from context by hour 2–3 on any model — just-in-time reinforcement beats a bigger rulebook at the top.
 
 ### Auto-Escalation
 

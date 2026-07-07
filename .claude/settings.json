@@ -31,6 +31,39 @@
             "statusMessage": "Checking specialist-routing policy..."
           }
         ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/route-guard.mjs",
+            "timeout": 10,
+            "statusMessage": "Checking specialist-routing policy (shell writes)..."
+          }
+        ]
+      },
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/agent-identity-guard.mjs",
+            "timeout": 10,
+            "statusMessage": "Validating spawn brief..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/rules-reinject.mjs",
+            "timeout": 5
+          }
+        ]
       }
     ]
   }
