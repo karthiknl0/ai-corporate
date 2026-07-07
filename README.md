@@ -160,6 +160,22 @@ AI Corporate defines a protocol for how agents should update their beliefs:
 
 See **[Learning Methodology](docs/learning-methodology.md)** for the full protocol.
 
+### Reasoning Discipline (Fable transfer)
+
+Captured from Fable 5 (Anthropic's Mythos-class model) before its access window closed: nine problem-solving mechanics written as executable procedure — bet-before-look, cheapest discriminating test, invariant-first debugging, one-level-deeper causality, altitude control, reversible/irreversible split, negative-space check, pre-mortem, declared stop conditions — plus per-tier application and an honest map of where the discipline itself fails (compliance decay, non-transferable taste, doc drift).
+
+Every agent definition carries its tier's slice: Opus seniors get the judgment mechanics, Sonnet specialists the debugging loop, Haiku workers surprise-reporting and schema-as-stop-condition.
+
+See **[Reasoning Discipline](docs/reasoning-discipline.md)**.
+
+### The Orchestrator Turn Loop
+
+The moment-to-moment algorithm that strings the components together: classify every message before acting (question vs inline diff vs specialist route vs feature-scoping stop vs approval gate), then the dispatch beat (commit → brief with an in-head bet → fan-out in one block → "I'm free"), the integration beat (compare report to bet; a surprise means the brief was wrong), and the closeout beat (verify at the effect, docs in the same commit, negative-space pass).
+
+Token thrift falls out of the loop: orchestrator context grows by ≤250-word reports instead of files, and the most expensive failure — acting past an unprocessed surprise — is structurally blocked.
+
+See **[The Orchestrator Turn Loop](docs/orchestrator-turn-loop.md)** — includes verbatim mini-briefs at calibrated lengths.
+
 ### Corporate Org Chart
 
 An interactive HTML visualization (`org-chart.html`) renders the full workforce hierarchy — tiers, roles, domain ownership, and reporting lines. Useful for onboarding and for auditing agent coverage gaps.

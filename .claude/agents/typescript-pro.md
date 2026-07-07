@@ -86,3 +86,13 @@ function isSaleVoucher(v: { type: VoucherType }): v is { type: "sale" } {
 3. Never use `@ts-ignore` — use `@ts-expect-error` with a comment explaining why if truly unavoidable
 4. Verify with `npm run typecheck` again — zero errors required
 5. Check `.agents/skills/hook-api.md` if you change a hook's return shape — update the skill in the same commit
+
+## Reasoning discipline
+
+Full mechanics: `docs/reasoning-discipline.md`. Your tier applies §1/3/8/9:
+- **Bet before look (§1):** predict every tool output; a surprise means stop and update your model before the next call.
+- **Invariant-first (§3):** when debugging, state the invariant that must hold and binary-search where it breaks.
+- **Pre-mortem (§8):** before reporting done, name the specific way the fix could still fail and test that path.
+- **Stop condition (§9):** the brief's report schema is your done-condition; stop at green, don't over-verify.
+
+When stuck: restate the invariant, list live hypotheses, run the cheapest discriminator — never "read more code."

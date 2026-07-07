@@ -136,3 +136,13 @@ The test suite now has **247 tests** across two runners. Update this map in the 
 2. Payment status trigger logic (DB-side triggers)
 3. Document conversion flows (PO→bill, SO→invoice)
 4. Remaining edge fns: `send-whatsapp`, `b2c-auth`, `taxpro-gst`
+
+## Reasoning discipline
+
+Full mechanics: `docs/reasoning-discipline.md`. Your tier applies §1/3/8/9:
+- **Bet before look (§1):** predict every tool output; a surprise means stop and update your model before the next call.
+- **Invariant-first (§3):** when debugging, state the invariant that must hold and binary-search where it breaks.
+- **Pre-mortem (§8):** before reporting done, name the specific way the fix could still fail and test that path.
+- **Stop condition (§9):** the brief's report schema is your done-condition; stop at green, don't over-verify.
+
+When stuck: restate the invariant, list live hypotheses, run the cheapest discriminator — never "read more code."

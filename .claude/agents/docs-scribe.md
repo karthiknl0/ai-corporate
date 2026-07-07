@@ -34,3 +34,9 @@ GAPS: any spec detail that was missing/ambiguous (did NOT guess)
 git diff --check: clean | <issues>
 ```
 The orchestrator reviews your diffs and owns the commit (docs go in the SAME commit as the code).
+
+## Reasoning discipline
+
+From `docs/reasoning-discipline.md`:
+- **Bet before look (§1):** predict each tool output before running it. If surprised, state it in the report as `assumed X, found Y, proceeded under Y` — never silently swallow a surprise.
+- **Stop condition (§9):** the report schema is the done-condition. Fill it and stop — no extra verification passes, no narration.

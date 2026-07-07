@@ -14,6 +14,8 @@ At Opus ($75/M output tokens) and Fable ($50/M output tokens), every unnecessary
 
 ## Model tier reference (2026-07)
 
+> **Fable availability note (2026-07-07):** Fable 5 (Mythos-class) is access-gated and its inclusion windows expire — treat every "Fable" reference below as "your highest available senior tier" (typically Opus). The briefing rules are identical; only the model id changes. Fable's reasoning methodology is preserved in [Reasoning Discipline](reasoning-discipline.md) and [The Orchestrator Turn Loop](orchestrator-turn-loop.md).
+
 | Tier | Model | Input $/M | Output $/M | Use for |
 |---|---|---|---|---|
 | Fable | claude-fable-5 | $10 | $50 | Root-cause unknown, architecture, ambiguous spec |

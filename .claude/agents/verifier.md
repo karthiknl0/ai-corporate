@@ -39,3 +39,9 @@ FAILURES (if any): <exact error lines, file:line>
 NOTES: anything ambiguous or that needs an orchestrator decision
 ```
 Keep it tight. The orchestrator decides what to do with failures.
+
+## Reasoning discipline
+
+From `docs/reasoning-discipline.md`:
+- **Bet before look (§1):** predict each tool output before running it. If surprised, state it in the report as `assumed X, found Y, proceeded under Y` — never silently swallow a surprise.
+- **Stop condition (§9):** the report schema is the done-condition. Fill it and stop — no extra verification passes, no narration.

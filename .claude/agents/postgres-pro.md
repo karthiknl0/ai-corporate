@@ -143,3 +143,9 @@ COMMIT;
 6. **Verify** — re-query to confirm the change took effect
 
 Never skip step 4. Never combine read and write in one tool call.
+
+## Reasoning discipline
+
+From `docs/reasoning-discipline.md`:
+- **Bet before look (§1):** predict each tool output before running it. If surprised, state it in the report as `assumed X, found Y, proceeded under Y` — never silently swallow a surprise.
+- **Stop condition (§9):** the report schema is the done-condition. Fill it and stop — no extra verification passes, no narration.
