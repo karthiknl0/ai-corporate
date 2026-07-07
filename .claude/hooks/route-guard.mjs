@@ -56,10 +56,20 @@ const DOMAINS = [
 const SRC_CATCHALL = /(^|[\\/])src[\\/].*\.(ts|tsx|css)$/i;
 const EDGE_CATCHALL = /supabase[\\/]functions[\\/].*\.(ts|js)$/i;
 
+// v5 (2026-07-07): DOC-WORKER ROUTING — the blanket .md allowance is closed.
+// "One-line doc edit is cheaper inline" gets generalized into multi-table doc
+// rewrites. Docs and skills route to their dedicated workers like any domain.
+const DOC_ROUTES = [
+  [/\.agents[\\/]skills[\\/].*\.md$/i, "skill-updater"],
+  [/(^|[\\/])docs[\\/].*\.md$/i, "docs-scribe"],
+];
+
 // Paths the orchestrator IS allowed to edit directly (no specialist needed)
 const ORCHESTRATOR_ALLOWED = [
-  /\.(md)$/i,                                      // docs, skills, memory
-  /\.(json)$/i,                                     // config files
+  /(^|[\\/])memory[\\/].*\.md$/i,                    // session memory files
+  /\.claude[\\/]memory[\\/]/i,                       // runtime memory files
+  /(^|[\\/])(CLAUDE|CODEX|AGENTS|README)\.md$/i,     // root instruction files
+  /\.(json)$/i,                                      // config files
   /[\\/]migrations[\\/].*\.sql$/i,                   // migration file creation (not apply)
   /\.gitignore$/i,
   /\.githooks[\\/]/i,
@@ -197,8 +207,18 @@ if (agent) process.exit(0);
 
 // --- ORCHESTRATOR INLINE-EDIT CHECK (STRICT MODE) ---
 
-// Allow orchestrator to edit non-source files (docs, config, hooks, agents, migrations)
+// Allow orchestrator to edit non-source files (memory, root docs, config, hooks, agents, migrations)
 if (ORCHESTRATOR_ALLOWED.some(re => re.test(path))) process.exit(0);
+
+// v5: docs/skills route to their doc workers — deny with the worker name
+const docRoute = DOC_ROUTES.find(([re]) => re.test(path));
+if (docRoute) {
+  if (consumeOverride(path)) process.exit(0);
+  emit("deny",
+    `DOC ROUTING (v5) — "${path}" belongs to a doc worker. Spawn ${docRoute[1]} with the exact content/diff to apply. ` +
+    `memory/ and root CLAUDE.md remain orchestrator-editable. ` +
+    `If genuinely no worker applies, ask the USER to add this path to .claude/ROUTE_OVERRIDE.`);
+}
 
 // Block ALL source code edits by orchestrator
 const isSourceFile = SRC_CATCHALL.test(path) || EDGE_CATCHALL.test(path);

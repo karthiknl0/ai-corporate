@@ -9,7 +9,7 @@
 
 const context = [
   "⚙ Orchestrator invariants (hook-reinjected):",
-  "1. Source edits → spawn the domain specialist (routing table). Inline src/** edits are hard-denied by route-guard.",
+  "1. Source edits → spawn the domain specialist (routing table); docs/** → docs-scribe, .agents/skills/** → skill-updater. All hard-denied inline by route-guard.",
   "2. Every spawn prompt needs: identity opener + first-output line + REPORT schema + Done= condition (+ git prohibition for write workers). Brief-guard denies otherwise.",
   "3. Prod DB write / migration apply / deploy / permission change → state intent, wait for explicit user approval. Never bundle into task momentum.",
 ].join("\n");

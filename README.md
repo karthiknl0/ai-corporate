@@ -75,13 +75,15 @@ A `.githooks/pre-commit` script runs 8 checks before any commit lands:
 7. **Edge function check** — Deno files must pass `deno check`
 8. **Test gate** — enforced test coverage for changed modules
 
-### Route-Guard Hook (v4 — hard deny)
+### Route-Guard Hook (v5 — hard deny, docs route too)
 
 A `PreToolUse` hook intercepts file writes in real time — both `Edit`/`Write` tool calls AND shell writes (`sed -i`, redirects, `tee`, `cp`/`mv`, `Set-Content`, `git apply/checkout/restore`). If the orchestrator tries to write a specialist-domain source file, the hook **denies** the write and names the specialist to spawn.
 
 Deny, not ask: an "ask" dialog gets habitually approved and the orchestrator learns nothing; a deny bounces the correction back to the model, which then spawns the specialist. This matters most on cheaper orchestrator tiers (Sonnet), where rule compliance decays fastest.
 
 Genuine inline exceptions go through a **user-only override file** (`.claude/ROUTE_OVERRIDE`, one path per line, consumed one-shot) — the hook denies any in-session attempt to create or modify it, so only the human can grant the exception.
+
+**v5 — docs route too.** The blanket "orchestrator may edit any `.md`" allowance is closed: `docs/**` routes to the docs worker, `.agents/skills/**` to the skill updater. Field observation: the "one-line doc edit is cheaper inline" carve-out got generalized into full multi-table doc rewrites by two different orchestrator models on the same day. Memory files and root `CLAUDE.md` remain orchestrator-editable.
 
 ### Brief-Guard Hook
 
