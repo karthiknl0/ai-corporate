@@ -229,6 +229,33 @@ RTK's transparent hook-level integration is documented here for Claude Code. Cod
 
 ---
 
+## Response Verbosity Control with Caveman
+
+RTK (above) compresses *tool output input* — what CLI commands pipe back into the model. [Caveman](https://github.com/JuliusBrussee/caveman) is a complementary, separate layer: it compresses *agent output* itself, rewriting responses in terse, fragment-heavy phrasing (~65% fewer output tokens in the maintainer's own benchmarks) while keeping code, commands, and error text byte-exact.
+
+It is not a proxy and does not route any traffic — it's a skill/instruction set the agent reads, so it fits AI Corporate's "enforce, don't advise" model as an optional add-on, not infrastructure sitting between you and the model.
+
+**Claude Code (global, user-scoped plugin):**
+
+```bash
+claude plugin marketplace add JuliusBrussee/caveman
+claude plugin install caveman@caveman
+```
+
+**Codex:**
+
+```bash
+npx skills add JuliusBrussee/caveman -a codex
+```
+
+Run from your home directory for a global/user-level install, or from inside a specific repo to scope it there — the installer detects the working directory it's run from.
+
+**Activation:** on both agents this is a manual per-session toggle — `/caveman` (defaults to `full`) or `/caveman lite` for a lighter touch. There is no persistent default-intensity setting in either integration; say "normal mode" to turn it off.
+
+See `docs/agent-efficiency.md` for how this fits alongside RTK's tool-output compression and AI Corporate's own R1–R19 output discipline rules — the three layers cover different token classes (tool-output input, agent-response output, and behavioral discipline) rather than overlapping.
+
+---
+
 ## Getting Started
 
 ### 1. Clone the repo
@@ -437,3 +464,8 @@ MIT
 ## Credits
 
 Built by [Karthik Nataraj](https://github.com/karthiknl0) for your project ERP, extracted as a reusable framework for governing AI coding agent workforces.
+
+**Complementary tools referenced in this README** (not part of AI Corporate, credited to their own maintainers):
+
+- [RTK](https://github.com/reachingforthejack/rtk) — tool-output compression, by reachingforthejack.
+- [Caveman](https://github.com/JuliusBrussee/caveman) — agent response verbosity control, by [Julius Brussee](https://github.com/JuliusBrussee).
