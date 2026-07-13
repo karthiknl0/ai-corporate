@@ -29,7 +29,11 @@ Keep the core profiles (`corporate_architect`, `code_mapper`, `implementation_sp
 
 The bundled Codex mapping is `gpt-5.6-sol` for senior review, `gpt-5.6-terra` for implementation, and `gpt-5.6-luna` for mapping, verification, and docs. If your Codex workspace does not offer one of those model IDs, change the affected `.codex/agents/*.toml` profile to an available Codex model; do not substitute Claude model names.
 
-4. **Copy shared Git gates if wanted:**
+4. **Add clarification discipline to your project guidance:**
+
+Keep this rule in `AGENTS.md`: proceed with a stated, reasonable, reversible assumption; ask only when the answer materially changes scope, data, cost, safety, or an irreversible action. Do not turn ordinary requests into refusal speeches, debates about the user's framing, or repeated non-blocking questions.
+
+5. **Copy shared Git gates if wanted:**
 
 ```bash
 cp -r ai-corporate/.githooks/ your-project/.githooks/

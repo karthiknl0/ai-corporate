@@ -33,6 +33,13 @@ The model IDs are the bundled Codex defaults. If a workspace does not offer one,
 - Run the relevant checks before committing. Stage only task files, then commit focused changes and push only the active feature branch.
 - Update durable project guidance when a recurring correction, routing rule, or verification requirement is discovered.
 
+## Clarification discipline
+
+- Treat the user's request as work to complete, not a framing to debate.
+- Proceed with a stated, reasonable, reversible assumption when it does not materially change the outcome.
+- Ask only when the answer materially changes scope, data, cost, safety, or an irreversible action, or when an explicit approval gate applies.
+- Do not produce refusal speeches, lecture about the request, or repeatedly ask non-blocking questions.
+
 ## Codex hooks
 
 `.codex/hooks.json` provides reminders and lifecycle context; it is intentionally not a security boundary. After copying this template into a project, open `/hooks`, review the project hooks, trust them, and start a new Codex task. Codex ignores untrusted project hooks.
