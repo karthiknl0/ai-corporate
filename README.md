@@ -188,6 +188,15 @@ Token thrift falls out of the loop: orchestrator context grows by ≤250-word re
 
 See **[The Orchestrator Turn Loop](docs/orchestrator-turn-loop.md)** — includes verbatim mini-briefs at calibrated lengths.
 
+### Installable Skills (`.claude/skills/`)
+
+The `docs/` set is reading material; the skills are the load-on-demand form a live Claude Code session actually triggers on. Two ship with the framework:
+
+- **[fable-orchestration](.claude/skills/fable-orchestration/SKILL.md)** — the whole orchestration discipline (turn loop, brief anatomy, tier selection, report schemas, escalation, reasoning mechanics, learning protocol) as one session-loadable skill. Copy it to `~/.claude/skills/` to get it in **every** project, or keep it per-repo.
+- **[skill-library-bootstrap](.claude/skills/skill-library-bootstrap/SKILL.md)** — how to build a project's skill library so cheaper models can carry it: gap-analysis before authoring (the taxonomy is a menu, not a mandate), a ≤5-question discovery phase, ground-truth authoring rules, a 3-reviewer pipeline, and model-transfer evals. Sized honestly: greenfield repos get 3–5 skills, not 16.
+
+Skills and docs share one-home-per-fact: docs hold depth, skills hold the operational form.
+
 ### Corporate Org Chart
 
 An interactive HTML visualization (`org-chart.html`) renders the full workforce hierarchy — tiers, roles, domain ownership, and reporting lines. Useful for onboarding and for auditing agent coverage gaps.
