@@ -2,7 +2,7 @@
 
 **Corporate governance for Claude Code and Codex.**
 
-Run your AI agents like a company. Named employees, specialist routing, HR approval, disciplinary hooks, and cost-tier optimization.
+Run your AI agents like a company. Named employees, specialist routing, HR approval, disciplinary hooks, and capability-aligned roles.
 
 ![AI Corporate — Agent Workforce](assets/org-chart-preview.svg)
 
@@ -16,7 +16,7 @@ Multi-agent AI coding systems have a scaling problem. Once you move beyond a sin
 
 - **Who handles what?** Without routing rules, every agent tries to do everything — badly.
 - **Who's allowed to touch what?** Without domain boundaries, two agents edit the same file and create merge conflicts or silent regressions.
-- **How do you control cost?** Sending every task to your most capable (and most expensive) model wastes money on work a cheaper model handles fine.
+- **How do you assign work well?** Sending every task to the same model ignores the distinct strengths of specialized roles.
 - **How do you enforce standards?** Without pre-commit gates, agents skip documentation, ignore type errors, and bypass specialist knowledge.
 
 AI Corporate treats these as organizational problems, not technical ones. It gives your agents job titles, reporting lines, domain ownership, and disciplinary enforcement — the same structures that make human engineering teams function.
@@ -68,7 +68,7 @@ This prevents the generalist agent from attempting work it lacks context for. Cl
 
 ### Clarification Discipline
 
-The user request is work to complete, not a framing to debate. Proceed with a stated, reasonable, reversible assumption whenever it does not materially change the result. Ask only when the answer changes scope, data, cost, safety, an irreversible action, or a required approval. Do not replace ordinary work with refusal speeches, lectures, or repeated non-blocking questions.
+The user request is work to complete, not a framing to debate. Proceed with a stated, reasonable, reversible assumption whenever it does not materially change the result. Ask only when the answer changes scope, data, operational impact, safety, an irreversible action, or a required approval. Do not replace ordinary work with refusal speeches, lectures, or repeated non-blocking questions.
 
 ### 8 Pre-Commit Gates
 
@@ -87,11 +87,11 @@ A `.githooks/pre-commit` script runs 8 checks before any commit lands:
 
 A `PreToolUse` hook intercepts file writes in real time — both `Edit`/`Write` tool calls AND shell writes (`sed -i`, redirects, `tee`, `cp`/`mv`, `Set-Content`, `git apply/checkout/restore`). If the orchestrator tries to write a specialist-domain source file, the hook **denies** the write and names the specialist to spawn.
 
-Deny, not ask: an "ask" dialog gets habitually approved and the orchestrator learns nothing; a deny bounces the correction back to the model, which then spawns the specialist. This matters most on cheaper orchestrator tiers (Sonnet), where rule compliance decays fastest.
+Deny, not ask: an "ask" dialog gets habitually approved and the orchestrator learns nothing; a deny bounces the correction back to the model, which then spawns the specialist. This matters most for orchestrator roles, where rule compliance can decay under long-running work.
 
 Genuine inline exceptions go through a **user-only override file** (`.claude/ROUTE_OVERRIDE`, one path per line, consumed one-shot) — the hook denies any in-session attempt to create or modify it, so only the human can grant the exception.
 
-**v5 — docs route too.** The blanket "orchestrator may edit any `.md`" allowance is closed: `docs/**` routes to the docs worker, `.agents/skills/**` to the skill updater. Field observation: the "one-line doc edit is cheaper inline" carve-out got generalized into full multi-table doc rewrites by two different orchestrator models on the same day. Memory files and root `CLAUDE.md` remain orchestrator-editable.
+**v5 — docs route too.** The blanket "orchestrator may edit any `.md`" allowance is closed: `docs/**` routes to the docs worker, `.agents/skills/**` to the skill updater. Field observation: the "one-line doc edit is faster inline" carve-out got generalized into full multi-table doc rewrites by two different orchestrator models on the same day. Memory files and root `CLAUDE.md` remain orchestrator-editable.
 
 ### Claude Code Brief-Guard Hook
 
@@ -109,7 +109,7 @@ When a Claude Code agent fails twice at a task, it automatically escalates to th
 haiku (fails) --> sonnet (fails) --> opus
 ```
 
-Two strikes at a tier triggers mandatory escalation. This prevents cheap models from burning tokens on problems above their capability.
+Two strikes at a tier triggers mandatory escalation. This prevents repeated attempts on problems above the agent's capability.
 
 ### Claude Code Domain Exclusion
 
@@ -117,26 +117,24 @@ File-level locking prevents two agents from editing the same domain simultaneous
 
 ### HR Recruitment
 
-Adding a new agent to the workforce is not free. Every new employee proposal goes through an HR evaluation that checks:
+Every new employee proposal goes through an HR evaluation that checks:
 
 - Does an existing agent already cover this domain?
-- Is the proposed model tier the cheapest that can handle the work?
+- Is the proposed model tier appropriate for the work?
 - Does the agent definition include clear boundaries and constraints?
 - Is there a routing trigger that would actually invoke this agent?
 
 This prevents agent sprawl — the tendency to create a new specialist for every minor sub-problem.
 
-### Cost Optimization
+### Role-Based Assignment
 
-The Claude Code three-tier system is explicitly designed to minimize token spend:
+The Claude Code three-tier system assigns work by role and responsibility:
 
 - **Haiku** handles grep sweeps, build verification, log monitoring, docs updates — anything mechanical and well-specified.
 - **Sonnet** handles domain-specific implementation where the agent needs real expertise.
-- **Opus** handles judgment calls, architecture decisions, and cross-cutting refactors where getting it wrong is expensive.
+- **Opus** handles judgment calls, architecture decisions, and cross-cutting refactors where mistakes are difficult to reverse.
 
-In practice, this produces roughly 40-50% token savings compared to routing everything through the most capable model.
-
-> **Stack with RTK for maximum savings.** [RTK (Rust Token Killer)](https://github.com/reachingforthejack/rtk) is a CLI proxy that sits at the Claude Code hook level and compresses tool outputs before they reach the model — independently of what agents write. Combine it with AI Corporate's agent output discipline (R1–R19, see `docs/agent-efficiency.md`) and you get savings from two separate layers: AI Corporate cuts agent *output* tokens by 50–65%; RTK cuts *tool output input* tokens by 60–90%. Together they typically reduce total session cost by 70–85% compared to an undisciplined all-Opus setup.
+[RTK (Rust Token Killer)](https://github.com/reachingforthejack/rtk) is a CLI proxy that can compress tool outputs before they reach the model. AI Corporate's agent output discipline (R1–R19, see `docs/agent-efficiency.md`) complements this by keeping agent reports concise and structured.
 
 ### Performance Tracking
 
@@ -182,7 +180,7 @@ See **[Learning Methodology](docs/learning-methodology.md)** for the full protoc
 
 ### Reasoning Discipline (Fable transfer)
 
-Captured from Fable 5 (Anthropic's Mythos-class model) before its access window closed: nine problem-solving mechanics written as executable procedure — bet-before-look, cheapest discriminating test, invariant-first debugging, one-level-deeper causality, altitude control, reversible/irreversible split, negative-space check, pre-mortem, declared stop conditions — plus per-tier application and an honest map of where the discipline itself fails (compliance decay, non-transferable taste, doc drift).
+Captured from Fable 5 (Anthropic's Mythos-class model) before its access window closed: nine problem-solving mechanics written as executable procedure — bet-before-look, most informative discriminating test, invariant-first debugging, one-level-deeper causality, altitude control, reversible/irreversible split, negative-space check, pre-mortem, declared stop conditions — plus per-tier application and an honest map of where the discipline itself fails (compliance decay, non-transferable taste, doc drift).
 
 Every Claude Code agent definition carries its tier's slice: Opus seniors get the judgment mechanics, Sonnet specialists the debugging loop, Haiku workers surprise-reporting and schema-as-stop-condition. The Codex profiles use the equivalent Sol, Terra, and Luna role split.
 
@@ -192,7 +190,7 @@ See **[Reasoning Discipline](docs/reasoning-discipline.md)**.
 
 The moment-to-moment algorithm that strings the components together: classify every message before acting (material question vs inline diff vs specialist route vs approval gate); for non-material ambiguity, state a reversible assumption and proceed. Then run the dispatch beat (commit → brief with an in-head bet → fan-out in one block → "I'm free"), the integration beat (compare report to bet; a surprise means the brief was wrong), and the closeout beat (verify at the effect, docs in the same commit, negative-space pass).
 
-Token thrift falls out of the loop: orchestrator context grows by ≤250-word reports instead of files, and the most expensive failure — acting past an unprocessed surprise — is structurally blocked.
+Concise reporting falls out of the loop: orchestrator context grows by ≤250-word reports instead of files, and the most severe failure — acting past an unprocessed surprise — is structurally blocked.
 
 See **[The Orchestrator Turn Loop](docs/orchestrator-turn-loop.md)** — includes verbatim mini-briefs at calibrated lengths.
 
@@ -201,11 +199,11 @@ See **[The Orchestrator Turn Loop](docs/orchestrator-turn-loop.md)** — include
 The `docs/` set is reading material; the skills are the load-on-demand form a live Claude Code session actually triggers on. Two ship with the framework:
 
 - **[fable-orchestration](.claude/skills/fable-orchestration/SKILL.md)** — the whole orchestration discipline (turn loop, brief anatomy, tier selection, report schemas, escalation, reasoning mechanics, learning protocol) as one session-loadable skill. Copy it to `~/.claude/skills/` to get it in **every** project, or keep it per-repo.
-- **[skill-library-bootstrap](.claude/skills/skill-library-bootstrap/SKILL.md)** — how to build a project's skill library so cheaper models can carry it: gap-analysis before authoring (the taxonomy is a menu, not a mandate), a ≤5-question discovery phase, ground-truth authoring rules, a 3-reviewer pipeline, and model-transfer evals. Sized honestly: greenfield repos get 3–5 skills, not 16.
+- **[skill-library-bootstrap](.claude/skills/skill-library-bootstrap/SKILL.md)** — how to build a project's skill library so worker models can carry it: gap-analysis before authoring (the taxonomy is a menu, not a mandate), a ≤5-question discovery phase, ground-truth authoring rules, a 3-reviewer pipeline, and model-transfer evals. Sized honestly: greenfield repos get 3–5 skills, not 16.
 
 Skills and docs share one-home-per-fact: docs hold depth, skills hold the operational form.
 
-Codex uses `AGENTS.md` for durable repository guidance and `.codex/agents/*.toml` for employee profiles. Its reusable skills live in `$HOME/.agents/skills` or the installing project's `.agents/skills`; do not copy Claude's `.claude/skills` directory into Codex as though it were a Codex configuration layer.
+Codex uses `AGENTS.md` for durable repository guidance and `.codex/agents/*.toml` for employee profiles. Its reusable skills live in the user's `.agents/skills` directory or the installing project's `.agents/skills`; do not copy Claude's `.claude/skills` directory into Codex as though it were a Codex configuration layer.
 
 ### Corporate Org Chart
 
@@ -213,19 +211,19 @@ An interactive HTML visualization (`org-chart.html`) renders the full workforce 
 
 ---
 
-## Further Cost Reduction — Stack with RTK
+## Tool Output Discipline with RTK
 
-AI Corporate controls *agent output* tokens (what agents write back). [RTK](https://github.com/reachingforthejack/rtk) controls *tool output input* tokens (what CLI tools pipe into the model) — a completely separate cost layer that AI Corporate cannot touch.
+AI Corporate controls *agent output* tokens (what agents write back). [RTK](https://github.com/reachingforthejack/rtk) can compress *tool output input* (what CLI tools pipe into the model) as a separate layer.
 
-Install RTK alongside this framework for an additional **60–90% reduction** on tool output tokens:
+Install RTK alongside this framework when its hook-level tool-output compression fits your Claude Code workflow:
 
 ```bash
 cargo install rtk
 # Then run Claude Code — RTK rewrites git/grep/bash output transparently via hook
-rtk gain   # see your savings
+rtk gain   # view tool-output statistics
 ```
 
-See `docs/agent-efficiency.md` for the full R1–R19 output discipline rules (the AI Corporate layer) and how both tools complement each other.
+See `docs/agent-efficiency.md` for the full R1–R19 output discipline rules and how both tools complement each other.
 
 RTK's transparent hook-level integration is documented here for Claude Code. Codex users should enable RTK only where their local Codex setup supports it; AI Corporate's Codex package does not claim to install or configure RTK automatically.
 
@@ -287,26 +285,16 @@ Edit `.githooks/pre-commit` to enable or disable gates based on your project's n
 
 ## How the System Works
 
-AI Corporate routes every task to the cheapest configured model that can handle it. The bundled runtime mappings are intentionally separate:
+AI Corporate routes every task to the configured role that best fits it. The bundled runtime mappings are intentionally separate:
 
 | Runtime | Senior / review | Specialist / implementation | Worker |
 |---------|-----------------|------------------------------|--------|
 | Claude Code | Opus | Sonnet | Haiku |
 | Codex | `gpt-5.6-sol` | `gpt-5.6-terra` | `gpt-5.6-luna` |
 
-The Claude Code pricing reference below is historical context for the original template; it is not a Codex pricing claim.
-
-| Tier | Model | Output Cost | Role |
-|------|-------|------------|------|
-| **Opus** ($75/MTok output) | Senior leadership | 60x Haiku | Judgment, architecture, approvals |
-| **Sonnet** ($15/MTok output) | Specialists | 12x Haiku | Domain expertise, implementation |
-| **Haiku** ($1.25/MTok output) | Workers | Baseline | Verification, grep, docs, mechanical tasks |
-
-This produced **40-50% token savings** in the original Claude Code deployment compared to routing everything through the most capable model. For Codex, use the same role split and configure model IDs available in your workspace rather than inferring Claude pricing.
+Use the same role split for Codex and configure the model IDs available in your workspace.
 
 For the Claude Code operational methodology, see **[How It Works](docs/how-it-works.md)** -- covering parallel execution, the orchestrator pattern, agent lifecycle, and the pre-commit gate pipeline. Codex setup and hook behavior are documented in [Migration Guide](docs/migration-guide.md).
-
-For detailed pricing, decision matrices, and anti-patterns, see **[Cost Model](docs/cost-model.md)**.
 
 ### Claude Code Session Example: Parallel Execution Flow
 
@@ -378,7 +366,7 @@ CLAUDE.md                          # Master rules file
                                    #   - Routing table (trigger -> agent)
                                    #   - Pre-commit gate definitions
                                    #   - Safety policies
-                                   #   - Cost-tier guidelines
+                                   #   - Model-role guidelines
 AGENTS.md                          # Codex-native routing and safety guidance
 ```
 
@@ -392,7 +380,6 @@ This framework was extracted from a production deployment where it managed:
 - **8 pre-commit gates** enforced on every commit
 - **3 governance hooks** (route-guard, db-write-guard, read-skill-reminder)
 - **247 enforced tests** gated by pre-commit
-- **~40-50% token savings** vs. an all-opus approach
 - **Performance log** tracking every agent task with violation accountability
 - **13 deliverables** completed in the first full governance session
 
@@ -404,7 +391,7 @@ This framework was extracted from a production deployment where it managed:
 
 **Enforce, don't advise.** Every rule that matters is hook-enforced. Advisory guidelines get ignored under token pressure. If a rule is worth having, it is worth blocking commits over.
 
-**Cheapest capable tier.** Every task should run on the cheapest model that can handle it: Claude Code uses Opus/Sonnet/Haiku; the bundled Codex profiles use Sol/Terra/Luna.
+**Capability-aligned roles.** Every task should run with the role that matches its scope: Claude Code uses Opus/Sonnet/Haiku; the bundled Codex profiles use Sol/Terra/Luna.
 
 **Documentation is not optional.** Code changes without matching docs updates are rejected at pre-commit. Agents cannot skip this step.
 
@@ -424,7 +411,7 @@ AI Corporate is domain-agnostic. The framework provides the governance structure
 
 4. **Choose your gates.** Enable the pre-commit gates that match your workflow. Docs pairing and typecheck are good defaults.
 
-5. **Tune cost tiers.** Assign the worker model to mechanical work (verification, formatting, grep), the specialist model to bounded implementation, and the senior/review model to decisions that are expensive to reverse. For the shipped Codex profiles this is Luna, Terra, and Sol respectively.
+5. **Assign model roles.** Assign the worker model to mechanical work (verification, formatting, grep), the specialist model to bounded implementation, and the senior/review model to decisions with broad or hard-to-reverse impact. For the shipped Codex profiles this is Luna, Terra, and Sol respectively.
 
 ---
 
