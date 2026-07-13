@@ -235,7 +235,11 @@ RTK (above) compresses *tool output input* — what CLI commands pipe back into 
 
 It is not a proxy and does not route any traffic — it's a skill/instruction set the agent reads, so it fits AI Corporate's "enforce, don't advise" model as an optional add-on, not infrastructure sitting between you and the model.
 
-**Claude Code (global, user-scoped plugin):**
+**Vendored in this repo:** `.claude/skills/caveman/SKILL.md` ships with AI Corporate — copying `.claude/skills/` into your project (see Getting Started) brings Caveman along with `fable-orchestration` and `skill-library-bootstrap`. No separate install needed for Claude Code to pick it up. The vendored copy is the upstream skill definition as of 2026-07-13; it's not auto-updated, so check [the upstream repo](https://github.com/JuliusBrussee/caveman) for newer versions.
+
+For the full upstream toolkit (extra slash-commands like `/caveman-commit`, `/caveman-review`, `/caveman-stats`, and the Codex integration), install directly from upstream:
+
+**Claude Code (global, user-scoped plugin — full toolkit, not just the skill):**
 
 ```bash
 claude plugin marketplace add JuliusBrussee/caveman
@@ -250,7 +254,7 @@ npx skills add JuliusBrussee/caveman -a codex
 
 Run from your home directory for a global/user-level install, or from inside a specific repo to scope it there — the installer detects the working directory it's run from.
 
-**Activation:** on both agents this is a manual per-session toggle — `/caveman` (defaults to `full`) or `/caveman lite` for a lighter touch. There is no persistent default-intensity setting in either integration; say "normal mode" to turn it off.
+**Activation:** whether vendored or installed from upstream, this is a manual per-session toggle — `/caveman` (defaults to `full`) or `/caveman lite` for a lighter touch. There is no persistent default-intensity setting; say "normal mode" to turn it off.
 
 See `docs/agent-efficiency.md` for how this fits alongside RTK's tool-output compression and AI Corporate's own R1–R19 output discipline rules — the three layers cover different token classes (tool-output input, agent-response output, and behavioral discipline) rather than overlapping.
 
