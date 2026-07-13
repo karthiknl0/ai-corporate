@@ -66,6 +66,10 @@ A routing table in `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex) maps trigger
 
 This prevents the generalist agent from attempting work it lacks context for. Claude Code's route-guard can hard-deny out-of-route writes; Codex hooks provide lifecycle context and routing reminders because its hook payload does not expose a reliable parent-versus-subagent identity.
 
+### Clarification Discipline
+
+The user request is work to complete, not a framing to debate. Proceed with a stated, reasonable, reversible assumption whenever it does not materially change the result. Ask only when the answer changes scope, data, cost, safety, an irreversible action, or a required approval. Do not replace ordinary work with refusal speeches, lectures, or repeated non-blocking questions.
+
 ### 8 Pre-Commit Gates
 
 A `.githooks/pre-commit` script runs 8 checks before any commit lands:
@@ -186,7 +190,7 @@ See **[Reasoning Discipline](docs/reasoning-discipline.md)**.
 
 ### The Orchestrator Turn Loop
 
-The moment-to-moment algorithm that strings the components together: classify every message before acting (question vs inline diff vs specialist route vs feature-scoping stop vs approval gate), then the dispatch beat (commit → brief with an in-head bet → fan-out in one block → "I'm free"), the integration beat (compare report to bet; a surprise means the brief was wrong), and the closeout beat (verify at the effect, docs in the same commit, negative-space pass).
+The moment-to-moment algorithm that strings the components together: classify every message before acting (material question vs inline diff vs specialist route vs approval gate); for non-material ambiguity, state a reversible assumption and proceed. Then run the dispatch beat (commit → brief with an in-head bet → fan-out in one block → "I'm free"), the integration beat (compare report to bet; a surprise means the brief was wrong), and the closeout beat (verify at the effect, docs in the same commit, negative-space pass).
 
 Token thrift falls out of the loop: orchestrator context grows by ≤250-word reports instead of files, and the most expensive failure — acting past an unprocessed surprise — is structurally blocked.
 
