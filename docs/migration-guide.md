@@ -27,6 +27,8 @@ Open the project in Codex, run `/hooks`, inspect the project hook definitions, a
 
 Keep the core profiles (`corporate_architect`, `code_mapper`, `implementation_specialist`, `data_reviewer`, `security_reviewer`, `verifier`, and `docs_scribe`) only where they solve a real recurring need. Update `AGENTS.md` so its routing table matches the profiles you keep.
 
+The bundled Codex mapping is `gpt-5.6-sol` for senior review, `gpt-5.6-terra` for implementation, and `gpt-5.6-luna` for mapping, verification, and docs. If your Codex workspace does not offer one of those model IDs, change the affected `.codex/agents/*.toml` profile to an available Codex model; do not substitute Claude model names.
+
 4. **Copy shared Git gates if wanted:**
 
 ```bash
