@@ -14,15 +14,17 @@ Every subagent is a named employee. Use the project profiles under `.codex/agent
 
 | Trigger | Codex agent |
 |---|---|
-| Cross-cutting design, three or more moving parts, or unclear blast radius | `corporate_architect` (Rajan) |
-| Locate ownership, callers, or relevant tests | `code_mapper` (Gita) |
-| Bounded implementation after the design is clear | `implementation_specialist` (Mira) |
-| Schema, queries, migrations, or data invariants | `data_reviewer` (Priya) |
-| Authentication, secrets, permissions, or trust boundaries | `security_reviewer` (Kavya) |
-| Build, typecheck, test, lint, or smoke matrix | `verifier` (Anand) |
-| Multi-file documentation updates from an approved specification | `docs_scribe` (Saras) |
+| Cross-cutting design, three or more moving parts, or unclear blast radius | `corporate_architect` (Rajan, `gpt-5.6-sol`) |
+| Locate ownership, callers, or relevant tests | `code_mapper` (Gita, `gpt-5.6-luna`) |
+| Bounded implementation after the design is clear | `implementation_specialist` (Mira, `gpt-5.6-terra`) |
+| Schema, queries, migrations, or data invariants | `data_reviewer` (Priya, `gpt-5.6-sol`) |
+| Authentication, secrets, permissions, or trust boundaries | `security_reviewer` (Kavya, `gpt-5.6-sol`) |
+| Build, typecheck, test, lint, or smoke matrix | `verifier` (Anand, `gpt-5.6-luna`) |
+| Multi-file documentation updates from an approved specification | `docs_scribe` (Saras, `gpt-5.6-luna`) |
 
 Give every subagent a short brief with its identity, exact scope, constraints, report schema, and `Done =` condition. Do not ask subagents to commit, deploy, apply migrations, or use destructive Git commands.
+
+The model IDs are the bundled Codex defaults. If a workspace does not offer one, replace that profile's `model` with an available Codex model while retaining its role and reasoning effort.
 
 ## Safety and delivery
 
