@@ -1,0 +1,57 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/session-context.mjs\"",
+            "commandWindows": "powershell -NoProfile -Command \"$r = git rev-parse --show-toplevel; node (Join-Path $r '.codex/hooks/session-context.mjs')\"",
+            "timeout": 10,
+            "statusMessage": "Loading AI Corporate guidance..."
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/subagent-context.mjs\"",
+            "commandWindows": "powershell -NoProfile -Command \"$r = git rev-parse --show-toplevel; node (Join-Path $r '.codex/hooks/subagent-context.mjs')\"",
+            "timeout": 10,
+            "statusMessage": "Loading employee brief rules..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/rules-reinject.mjs\"",
+            "commandWindows": "powershell -NoProfile -Command \"$r = git rev-parse --show-toplevel; node (Join-Path $r '.codex/hooks/rules-reinject.mjs')\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$(git rev-parse --show-toplevel)/.codex/hooks/source-edit-reminder.mjs\"",
+            "commandWindows": "powershell -NoProfile -Command \"$r = git rev-parse --show-toplevel; node (Join-Path $r '.codex/hooks/source-edit-reminder.mjs')\"",
+            "timeout": 10,
+            "statusMessage": "Checking corporate routing..."
+          }
+        ]
+      }
+    ]
+  }
+}

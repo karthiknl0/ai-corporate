@@ -1,10 +1,45 @@
 # Migrating an Existing Project to AI Corporate
 
-This guide covers three adoption scenarios depending on your starting point, plus an incremental rollout plan and common issues.
+This guide covers Claude Code and Codex adoption scenarios, plus an incremental rollout plan and common issues. The two integrations share the corporate method but use their own native configuration surfaces.
 
 ---
 
-## Scenario 1: Fresh Claude Code Project (No Agents Yet)
+## Scenario 1: Fresh Codex Project
+
+Codex reads durable repository guidance from `AGENTS.md`, project settings from `.codex/config.toml`, and custom employee profiles from `.codex/agents/*.toml`.
+
+### Steps
+
+1. **Copy the Codex package and guidance:**
+
+```bash
+cp -r ai-corporate/.codex/ your-project/.codex/
+cp ai-corporate/AGENTS.md your-project/AGENTS.md
+```
+
+If the project already has an `AGENTS.md` or `.codex/` directory, merge the corporate routing and safety sections into the existing project guidance. Do not overwrite the project's commands or conventions.
+
+2. **Trust the project hooks:**
+
+Open the project in Codex, run `/hooks`, inspect the project hook definitions, and trust them. Codex skips untrusted project-local hooks. Start a new task after trusting them so the session-start guidance is injected.
+
+3. **Tailor the employee profiles:**
+
+Keep the core profiles (`corporate_architect`, `code_mapper`, `implementation_specialist`, `data_reviewer`, `security_reviewer`, `verifier`, and `docs_scribe`) only where they solve a real recurring need. Update `AGENTS.md` so its routing table matches the profiles you keep.
+
+4. **Copy shared Git gates if wanted:**
+
+```bash
+cp -r ai-corporate/.githooks/ your-project/.githooks/
+cd your-project
+git config core.hooksPath .githooks
+```
+
+Codex hooks reinforce routing and approval context; Git hooks remain the durable commit-quality layer.
+
+---
+
+## Scenario 2: Fresh Claude Code Project (No Agents Yet)
 
 You have a repo but haven't used Claude Code agents or governance before.
 
@@ -52,7 +87,7 @@ After a week or two, review your session transcripts. If you keep doing the same
 
 ---
 
-## Scenario 2: Existing Claude Code Project with CLAUDE.md but No Agents
+## Scenario 3: Existing Claude Code Project with CLAUDE.md but No Agents
 
 You already have a CLAUDE.md with project rules. You want to add the agent governance layer without losing your existing configuration.
 
@@ -113,7 +148,7 @@ Add the remaining gates over subsequent weeks as your team adapts.
 
 ---
 
-## Scenario 3: Existing Project with Some Agents Already
+## Scenario 4: Existing Project with Some Agents Already
 
 You have agent definitions but no governance framework around them.
 
@@ -301,8 +336,13 @@ Pin this in your team channel. Update it when you add or remove agents.
 | File/Directory | Purpose |
 |----------------|---------|
 | `CLAUDE.md` | Routing table, safety gates, escalation policy |
+| `AGENTS.md` | Codex-native routing, safety, and verification guidance |
 | `.claude/agents/` | Agent definitions (one `.md` per agent) |
 | `.claude/hooks/` | Governance hooks (route-guard, domain-exclusion) |
 | `.claude/settings.json` | Hook registration, permissions |
+| `.codex/agents/` | Named Codex subagent profiles (one `.toml` per agent) |
+| `.codex/hooks.json` | Project-local Codex lifecycle hook registration |
+| `.codex/hooks/` | Codex lifecycle context and routing-reminder scripts |
+| `.codex/config.toml` | Project-level Codex agent settings |
 | `.githooks/` | Git hooks (pre-commit gates) |
 | `docs/` | Agent skill files, knowledge maps |

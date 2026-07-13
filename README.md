@@ -1,6 +1,6 @@
 # AI Corporate
 
-**Corporate governance for AI coding agents.**
+**Corporate governance for Claude Code and Codex.**
 
 Run your AI agents like a company. Named employees, specialist routing, HR approval, disciplinary hooks, and cost-tier optimization.
 
@@ -230,9 +230,19 @@ git clone https://github.com/your-org/ai-corporate.git
 ### 2. Copy the framework into your project
 
 ```bash
+# Claude Code
 cp -r ai-corporate/.claude/ your-project/.claude/
+cp ai-corporate/CLAUDE.md your-project/CLAUDE.md
+
+# Codex
+cp -r ai-corporate/.codex/ your-project/.codex/
+cp ai-corporate/AGENTS.md your-project/AGENTS.md
+
+# Shared Git quality gates
 cp -r ai-corporate/.githooks/ your-project/.githooks/
 ```
+
+If the target already has `CLAUDE.md`, `AGENTS.md`, `.claude/`, or `.codex/`, merge the template deliberately rather than overwriting project-specific rules.
 
 ### 3. Configure git hooks
 
@@ -244,7 +254,7 @@ chmod +x .githooks/pre-commit
 
 ### 4. Customize agent definitions
 
-Edit the files in `.claude/agents/` to match your project's domains. Each agent definition is a Markdown file specifying:
+For Claude Code, edit `.claude/agents/`. For Codex, edit `.codex/agents/`. Both packages provide named, scoped employee profiles; keep their responsibilities aligned with your project's domains.
 
 - Name, role, and model tier
 - Tools the agent is allowed to use
@@ -253,7 +263,9 @@ Edit the files in `.claude/agents/` to match your project's domains. Each agent 
 
 ### 5. Update the routing table
 
-Edit `CLAUDE.md` to map your project's file structure and domains to the appropriate specialists. The routing table is the core of the system — it determines which agent handles which trigger.
+Edit `CLAUDE.md` for Claude Code and `AGENTS.md` for Codex to map your project's file structure and domains to the appropriate specialists. The routing table is the core of the system — it determines which agent handles which trigger.
+
+For Codex, open `/hooks` after copying `.codex/`, review the project-local hook definitions, trust them, then start a new task. Project hooks are skipped until trusted.
 
 ### 6. Configure pre-commit gates
 
@@ -330,6 +342,16 @@ The orchestrator never does specialist work inline. It coordinates, verifies, an
   org-chart.html                   # Interactive workforce visualization
   settings.json                    # Hook registration + permissions
 
+.codex/
+  agents/                          # Named Codex subagent profiles (.toml)
+    corporate_architect.toml
+    implementation_specialist.toml
+    verifier.toml
+    ...
+  hooks/                           # Codex lifecycle context and routing reminders
+  hooks.json                       # Codex hook registration
+  config.toml                      # Project-level Codex agent settings
+
 .githooks/
   pre-commit                       # 8-gate enforcement hook
 
@@ -338,6 +360,7 @@ CLAUDE.md                          # Master rules file
                                    #   - Pre-commit gate definitions
                                    #   - Safety policies
                                    #   - Cost-tier guidelines
+AGENTS.md                          # Codex-native routing and safety guidance
 ```
 
 ---
